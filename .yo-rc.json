@@ -1,0 +1,12 @@
+{
+  "generator-backbone": {
+    "appPath": "app",
+    "appName": "Weatherapp",
+    "coffee": false,
+    "testFramework": "mocha",
+    "templateFramework": "handlebars",
+    "compassBootstrap": true,
+    "includeRequireJS": true
+  },
+  "generator-mocha": {}
+}
