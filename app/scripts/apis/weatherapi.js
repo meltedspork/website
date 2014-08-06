@@ -7,11 +7,11 @@ define([
     'use strict';
 
     var WeatherAPI = Backbone.Model.extend({
-        url: function() { return this.defaults.static_data.api_url },
+        url: function() { return this.defaults.staticData.url },
 
         initialize: function(models, options) {
-            this.defaults.dynamic_data.city = options.city;
-            this.defaults.dynamic_data.state = options.state;
+            this.defaults.dynamicData.city = options.city;
+            this.defaults.dynamicData.state = options.state;
         },
 
         defaults: {
@@ -30,25 +30,25 @@ define([
             50: mist
             **********************
             */
-            static_data: {
-                api_url : "http://api.openweathermap.org/data/2.5/weather",
+            staticData: {
+                url : 'http://api.openweathermap.org/data/2.5/weather',
                 conditions : {
-                    "01":["Clear",true],
-                    "02":["SunnyCloudy",true],
-                    "03":["Cloudy",false],
-                    "04":["GrayCloudy",true],
-                    "09":["Shower",false],
-                    "10":["Rain",true],
-                    "11":["Thunderstorm",false],
-                    "13":["Snow",false],
-                    "50":["Mist",false]
+                    '01':['Clear',true],
+                    '02':['SunnyCloudy',true],
+                    '03':['Cloudy',false],
+                    '04':['GrayCloudy',true],
+                    '09':['Shower',false],
+                    '10':['Rain',true],
+                    '11':['Thunderstorm',false],
+                    '13':['Snow',false],
+                    '50':['Mist',false]
                 },
                 periods : {
-                    "d":["Day","Sun"],
-                    "n":["Night","Moon"]
+                    'd':['Day','Sun'],
+                    'n':['Night','Moon']
                 }
             },
-            dynamic_data: {}
+            dynamicData: {}
         },
 
         validate: function(attrs, options) {

@@ -18,7 +18,7 @@ define([
         defaults: {
         },
 
-        get_weather : function(that) {
+        getWeather : function(that) {
             var self = this;
             var api = MeltedSpork.API;
 
@@ -38,15 +38,15 @@ define([
                     api.Weather.fetch({
                         data: { q: city + "," + state },
                         success: function () {
-                            var weather_data = api.Weather.attributes,
-                                weather_dynamic = weather_data.dynamic_data,
-                                weather_static = weather_data.static_data,
-                                weather_icon = weather_data.weather[0].icon;
+                            var weatherData = api.Weather.attributes,
+                                weatherDynamic = weatherData.dynamicData,
+                                weatherStatic = weatherData.staticData,
+                                weatherIcon = weatherData.weather[0].icon;
 
-                            weather_dynamic.condition = weather_static.conditions[weather_icon.replace(/\D/g, "")];
-                            weather_dynamic.period = weather_static.periods[weather_icon.replace(/[^a-z]/gi, "")];
+                            weatherDynamic.condition = weatherStatic.conditions[weatherIcon.replace(/\D/g, "")];
+                            weatherDynamic.period = weatherStatic.periods[weatherIcon.replace(/[^a-z]/gi, "")];
 
-                            self.set_weather(that,api);
+                            self.setWeather(that,api);
                             //self.output(api.Weather);
                         }
                     });
@@ -54,10 +54,10 @@ define([
             });
         },
 
-        set_weather: function(that,api) {
+        setWeather: function(that,api) {
 
             //console.log("show weather");
-            var weatherAPI = api.Weather.attributes.dynamic_data;/*,
+            var weatherAPI = api.Weather.attributes.dynamicData;/*,
                 weatherCanvas = MeltedSpork.Canvas.Weather;*/
 
             that[weatherAPI.condition[0]].visible = true;

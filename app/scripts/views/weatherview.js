@@ -74,7 +74,7 @@ define([
             createjs.Ticker.addEventListener("tick", stage);
 
             $.when(exportRoot).done(function(){
-                that.model.get_weather(exportRoot);
+                that.model.getWeather(exportRoot);
             });
 
             that.exportRoot = exportRoot;

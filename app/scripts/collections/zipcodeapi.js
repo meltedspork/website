@@ -7,7 +7,7 @@ define([
     'use strict';
 
     var ZipcodeAPI = Backbone.Collection.extend({
-        url: function() { return this.defaults.api_url + this.defaults.country + '/' + this.id },
+        url: function() { return this.defaults.url + this.defaults.country + '/' + this.id },
 
         initialize: function(models, options) {
             this.id = options.id;
@@ -15,8 +15,8 @@ define([
         },
 
         defaults: {
-            api_url: "http://zip.getziptastic.com/v2/",
-            country: "US"
+            url: 'http://zip.getziptastic.com/v2/',
+            country: 'US'
         },
 
         validate: function(attrs, options) {

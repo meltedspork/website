@@ -7,19 +7,19 @@ define([
     'use strict';
 
     var ZipcodeAPI = Backbone.Model.extend({
-        url: function() { return this.defaults.static_data.api_url + this.defaults.static_data.country + '/' + this.id },
+        url: function() { return this.defaults.staticData.url + this.defaults.staticData.country + '/' + this.id },
 
         initialize: function(models, options) {
             this.id = options.id;
-            this.defaults.dynamic_data.zipcode = this.id;
+            this.defaults.dynamicData.zipcode = this.id;
         },
 
         defaults: {
-            static_data: {
-                api_url: "http://zip.getziptastic.com/v2/",
-                country: "US"
+            staticData: {
+                url: 'http://zip.getziptastic.com/v2/',
+                country: 'US'
             },
-            dynamic_data: {}
+            dynamicData: {}
         },
 
         validate: function(attrs, options) {
