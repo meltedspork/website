@@ -1,0 +1,20 @@
+{
+	"api_url": "http://api.openweathermap.org/data/2.5/weather?q=",
+	"static_data": {
+		"conditions" : {
+			"01":["Clear",true,"clear sky"],
+			"02":["SunnyCloudy",true,"few clouds"],
+			"03":["Cloudy",false,"scattered clouds"],
+			"04":["GrayCloudy",true,"broken clouds"],
+			"09":["Shower",false,"shower rain"],
+			"10":["Rain",true,"rain"],
+			"11":["Thunderstorm",false,"thunderstorm"],
+			"13":["Snow",false,"snow"],
+			"50":["Mist",false,"mist"]
+		},
+		"periods" : {
+			"d":["Day","Sun"],
+			"n":["Night","Moon"]
+		}
+	}
+}
