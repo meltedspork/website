@@ -7,11 +7,11 @@ define([
     ,'underscore'
     ,'backbone'
     ,'templates'
-    ,'weathercanvas'
+    ,'canvas/weathercanvas'
     ,'models/weathermodel'
-    //,'easeljs' 
+    //,'easeljs'
 ], function (CreateJS, MovieClip, $, _, Backbone, JST, WeatherCanvas, WeatherModel) {
-//], function (CreateJS, $, _, Backbone, JST, WeatherCanvas, WeatherModel) {
+//], function ($, _, Backbone, JST, WeatherModel) {
     'use strict';
     var WeatherView = Backbone.View.extend({
         template: JST['app/scripts/templates/weather.ejs'],
@@ -47,7 +47,7 @@ define([
             container.style.height = document.body.clientHeight;
             container.style.overflow = "hidden";
             */
-
+            weatherimages = weatherimages||{};
             //console.log("lib:",lib);
 
             var loader = new createjs.LoadQueue(false);
@@ -56,14 +56,16 @@ define([
             loader.addEventListener("complete", function() {
                 that.handleComplete(that);
             });
-            loader.loadManifest(lib.properties.manifest);
+            loader.loadManifest(weatherlib.properties.manifest);
         }
         ,handleFileLoad: function (evt) {
-            if (evt.item.type == "image") { images[evt.item.id] = evt.result; }
+            if (evt.item.type == "image") { weatherimages[evt.item.id] = evt.result; }
             //console.log("images",images);
         }
         ,handleComplete: function(that) {
-            var exportRoot = new lib.weathercanvas();
+            window.weatherimg = weatherimages;
+            console.log("wi",weatherimg);
+            var exportRoot = new weatherlib.weathercanvas();
             //console.log("export", exportRoot);
 
             var canvas = document.getElementById("canvas");
@@ -72,7 +74,7 @@ define([
             stage.update();
             //console.log("stage:",stage);
 
-            createjs.Ticker.setFPS(lib.properties.fps);
+            createjs.Ticker.setFPS(weatherlib.properties.fps);
             createjs.Ticker.addEventListener("tick", stage);
 
             $.when(exportRoot).done(function(){
@@ -84,7 +86,6 @@ define([
         ,output: function (api) {
             console.log( api.toJSON());
         }
-
     });
 
     return WeatherView;

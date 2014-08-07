@@ -5,10 +5,10 @@ define([
 	,'backbone'
 	,'meltedspork'
 	,'views/weatherview'
-	//,'views/app'
+	,'views/appview'
 
-], function ($, Backbone, MeltedSpork, WeatherView) {
-//], function ($, Backbone, App, AboutView, AppView) {
+//], function ($, Backbone, MeltedSpork, WeatherView) {
+], function ($, Backbone, App, WeatherView, AppView) {
 	'use strict';
 
 	var Router = Backbone.Router.extend({
@@ -31,7 +31,9 @@ define([
 		},*/
 		home : function() {
 			console.log("huh?");
-			//var view = new WeatherView();
+			//var view = new AppView({
+				el: '.container'
+			});
 		}
 
 	});

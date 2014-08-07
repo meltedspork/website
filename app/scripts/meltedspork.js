@@ -40,5 +40,6 @@ define([
         }*/
     }))({el: document.body});
     window.MeltedSpork = MeltedSpork;
+    window.canvas = window.canvas||{};
     return MeltedSpork;
 });

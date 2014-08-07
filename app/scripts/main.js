@@ -13,18 +13,25 @@ require.config({
             deps: []
         }
         ,createjs: {
-        //,easeljs: {
             exports:'createjs'
         }
+        /*,easeljs: {
+            exports:'createjs'
+        }*/
         /*,tweenjs: {
             deps: ['easeljs'],
             exports: 'createjs.Tween'
         }*/
-        ,weathercanvas:{
+        /*,weathercanvas:{
             deps:['createjs'],
             //deps:['easeljs'],
             exports:'lib'
-        }
+        }*/
+        /*,appcanvas:{
+            deps:['easeljs'],
+            //deps:['easeljs'],
+            exports:'lib'
+        }*/
         ,movieclip: {
             deps:['createjs'],
             //deps: ['easeljs','tweenjs'],
@@ -41,11 +48,11 @@ require.config({
         ,underscore: '../bower_components/lodash/dist/lodash'
         ,bootstrap: '../bower_components/sass-bootstrap/dist/js/bootstrap'
         ,createjs: '../libs/createjs-2013.12.12.min'
+        ,movieclip: '../libs/movieclip-0.7.1.min'
         //,easeljs: '../bower_components/easeljs/lib/easeljs-0.7.1.min'
         //,tweenjs: '../bower_components/createjs-tweenjs/lib/tweenjs-0.5.1.min'
-        ,movieclip: '../bower_components/easeljs/lib/movieclip-0.7.1.min'
+        //,movieclip: '../bower_components/easeljs/lib/movieclip-0.7.1.min'
         //,preloadjs: '../bower_components/createjs-preloadjs/lib/preloadjs-0.4.1.min'
-        ,weathercanvas: '../canvas/weathercanvas'
     }
 });
 /*

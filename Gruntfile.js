@@ -47,6 +47,7 @@ module.exports = function (grunt) {
                     '<%= yeoman.app %>/*.html',
                     '{.tmp,<%= yeoman.app %>}/styles/{,*/}*.css',
                     '{.tmp,<%= yeoman.app %>}/scripts/{,*/}*.js',
+                    //'{.tmp,<%= yeoman.app %>}/canvas/{,*/}*.js',
                     '<%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp}',
                     '<%= yeoman.app %>/scripts/templates/*.{ejs,mustache,hbs}',
                     'test/spec/**/*.js'
@@ -164,13 +165,14 @@ module.exports = function (grunt) {
                         'templates': '../../.tmp/scripts/templates',
                         'jquery': '../../<%= yeoman.app %>/bower_components/jquery/dist/jquery',
                         'underscore': '../../<%= yeoman.app %>/bower_components/lodash/dist/lodash',
-                        'backbone': '../../<%= yeoman.app %>/bower_components/backbone/backbone',
-                        'createjs': '../../<%= yeoman.app %>/libs/createjs-2013.12.12.min',
+                        'backbone': '../../<%= yeoman.app %>/bower_components/backbone/backbone'
+                        //'createjs': '../../<%= yeoman.app %>/libs/createjs-2013.12.12.min',
                         //'easeljs': '../../<%= yeoman.app %>/bower_components/easeljs/lib/easeljs-0.7.1.min',
                         //'tweenjs': '../../<%= yeoman.app %>/bower_components/createjs-tweenjs/lib/tweenjs-0.5.1.min',
-                        'movieclip': '../../<%= yeoman.app %>/bower_components/easeljs/lib/movieclip-0.7.1.min',
+                        //'movieclip': '../../<%= yeoman.app %>/bower_components/easeljs/lib/movieclip-0.7.1.min',
                         //'preloadjs': '../../<%= yeoman.app %>/bower_components/createjs-preloadjs/lib/preloadjs-0.4.1.min',
-                        'weathercanvas': '../../<%= yeoman.app %>/canvas/weathercanvas'
+                        //'weathercanvas': '../../<%= yeoman.app %>/canvas/weathercanvas'
+                        //,'appcanvas': 'empty:'
                     },
                     // TODO: Figure out how to make sourcemaps work with grunt-usemin
                     // https://github.com/yeoman/grunt-usemin/issues/30
@@ -179,7 +181,7 @@ module.exports = function (grunt) {
                     // http://requirejs.org/docs/errors.html#sourcemapcomments
                     preserveLicenseComments: false,
                     useStrict: true,
-                    wrap: true
+                    wrap: true,
                     //uglify2: {} // https://github.com/mishoo/UglifyJS2
                 }
             }
@@ -277,7 +279,7 @@ module.exports = function (grunt) {
                     src: [
                         '<%= yeoman.dist %>/scripts/{,*/}*.js',
                         '<%= yeoman.dist %>/styles/{,*/}*.css',
-                        '<%= yeoman.dist %>/images/{,*/}*.{png,jpg,jpeg,gif,webp}',
+                        //'<%= yeoman.dist %>/images/{,*/}*.{png,jpg,jpeg,gif,webp}',
                         '/styles/fonts/{,*/}*.*',
                         'bower_components/sass-bootstrap/fonts/*.*'
                     ]

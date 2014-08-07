@@ -1,10 +1,4 @@
-define(['createjs','movieclip'], function(cjs, movieclip) {
-var lib = lib||{};
-var images = images||{};
-window.weatherlib = lib;
-window.weatherimages = images;
-
-//(function (lib, img, cjs) {
+(function (lib, img, cjs) {
 
 var p; // shortcut to reference prototypes
 
@@ -15,13 +9,13 @@ lib.properties = {
 	fps: 24,
 	color: "#000000",
 	manifest: [
-		{src:"../../images/Bitmap1.png", id:"Bitmap1"},
-		{src:"../../images/Bitmap2.png", id:"Bitmap2"},
-		{src:"../../images/cloud1.png", id:"cloud1"},
-		{src:"../../images/cloud2.png", id:"cloud2"},
-		{src:"../../images/fullmoon.png", id:"fullmoon"},
-		{src:"../../images/raindrop.png", id:"raindrop"},
-		{src:"../../images/sun.png", id:"sun"}
+		{src:"images/Bitmap1.png", id:"Bitmap1"},
+		{src:"images/Bitmap2.png", id:"Bitmap2"},
+		{src:"images/cloud1.png", id:"cloud1"},
+		{src:"images/cloud2.png", id:"cloud2"},
+		{src:"images/fullmoon.png", id:"fullmoon"},
+		{src:"images/raindrop.png", id:"raindrop"},
+		{src:"images/sun.png", id:"sun"}
 	]
 };
 
@@ -29,44 +23,46 @@ lib.properties = {
 
 // symbols:
 
+
+
 (lib.Bitmap1 = function() {
-	this.initialize(weatherimg.Bitmap1);
+	this.initialize(img.Bitmap1);
 }).prototype = p = new cjs.Bitmap();
 p.nominalBounds = new cjs.Rectangle(0,0,1408,804);
 
 
 (lib.Bitmap2 = function() {
-	this.initialize(weatherimg.Bitmap2);
+	this.initialize(img.Bitmap2);
 }).prototype = p = new cjs.Bitmap();
 p.nominalBounds = new cjs.Rectangle(0,0,1520,846);
 
 
 (lib.cloud1 = function() {
-	this.initialize(weatherimg.cloud1);
+	this.initialize(img.cloud1);
 }).prototype = p = new cjs.Bitmap();
 p.nominalBounds = new cjs.Rectangle(0,0,709,491);
 
 
 (lib.cloud2 = function() {
-	this.initialize(weatherimg.cloud2);
+	this.initialize(img.cloud2);
 }).prototype = p = new cjs.Bitmap();
 p.nominalBounds = new cjs.Rectangle(0,0,606,358);
 
 
 (lib.fullmoon = function() {
-	this.initialize(weatherimg.fullmoon);
+	this.initialize(img.fullmoon);
 }).prototype = p = new cjs.Bitmap();
 p.nominalBounds = new cjs.Rectangle(0,0,1223,1223);
 
 
 (lib.raindrop = function() {
-	this.initialize(weatherimg.raindrop);
+	this.initialize(img.raindrop);
 }).prototype = p = new cjs.Bitmap();
 p.nominalBounds = new cjs.Rectangle(0,0,13,80);
 
 
 (lib.sun = function() {
-	this.initialize(weatherimg.sun);
+	this.initialize(img.sun);
 }).prototype = p = new cjs.Bitmap();
 p.nominalBounds = new cjs.Rectangle(0,0,263,257);
 
@@ -1219,7 +1215,5 @@ p.nominalBounds = new cjs.Rectangle(-410.5,-255.5,2582.8,986.8);
 }).prototype = p = new cjs.MovieClip();
 p.nominalBounds = new cjs.Rectangle(-152.6,-506.5,3239.9,2121.9);
 
-//})(lib = lib||{}, images = images||{}, createjs = createjs||{});
-//var lib, images, createjs;
-return lib;
-});
+})(weatherlib = weatherlib||{}, weatherimg = weatherimg||{}, createjs = createjs||{});
+var weatherlib, weatherimg, createjs;
