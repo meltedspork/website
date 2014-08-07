@@ -9,7 +9,9 @@ define([
     ,'templates'
     ,'weathercanvas'
     ,'models/weathermodel'
+    //,'easeljs' 
 ], function (CreateJS, MovieClip, $, _, Backbone, JST, WeatherCanvas, WeatherModel) {
+//], function (CreateJS, $, _, Backbone, JST, WeatherCanvas, WeatherModel) {
     'use strict';
     var WeatherView = Backbone.View.extend({
         template: JST['app/scripts/templates/weather.ejs'],

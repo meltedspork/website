@@ -6,4 +6,4 @@ var app = connect();
 console.log("__dirname",__dirname);
 
 app.use(serveStatic(__dirname, {'index': ['index.html']}));
-app.listen(9000);
+app.listen(3000);

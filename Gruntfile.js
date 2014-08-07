@@ -164,7 +164,13 @@ module.exports = function (grunt) {
                         'templates': '../../.tmp/scripts/templates',
                         'jquery': '../../<%= yeoman.app %>/bower_components/jquery/dist/jquery',
                         'underscore': '../../<%= yeoman.app %>/bower_components/lodash/dist/lodash',
-                        'backbone': '../../<%= yeoman.app %>/bower_components/backbone/backbone'
+                        'backbone': '../../<%= yeoman.app %>/bower_components/backbone/backbone',
+                        'createjs': '../../<%= yeoman.app %>/libs/createjs-2013.12.12.min',
+                        //'easeljs': '../../<%= yeoman.app %>/bower_components/easeljs/lib/easeljs-0.7.1.min',
+                        //'tweenjs': '../../<%= yeoman.app %>/bower_components/createjs-tweenjs/lib/tweenjs-0.5.1.min',
+                        'movieclip': '../../<%= yeoman.app %>/bower_components/easeljs/lib/movieclip-0.7.1.min',
+                        //'preloadjs': '../../<%= yeoman.app %>/bower_components/createjs-preloadjs/lib/preloadjs-0.4.1.min',
+                        'weathercanvas': '../../<%= yeoman.app %>/canvas/weathercanvas'
                     },
                     // TODO: Figure out how to make sourcemaps work with grunt-usemin
                     // https://github.com/yeoman/grunt-usemin/issues/30
