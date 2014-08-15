@@ -17,12 +17,118 @@ lib.properties = {
 	]
 };
 
+// stage content:
+(lib.weathercanvas = function(mode,startPosition,loop) {
+	this.initialize(mode,startPosition,loop,{});
+
+	// timeline functions:
+	this.frame_0 = function() {
+		this.Day.visible = false;
+		this.Night.visible = false;
+		this.Sun.visible = false;
+		this.Moon.visible = false;
+
+		this.Clear.visible = false;
+		this.SunnyCloudy.visible = false;
+		this.Cloudy.visible = false;
+		this.GrayCloudy.visible = false;
+		this.Shower.visible = false;
+		//this.Rain.visible = false;
+		this.Thunderstorm.visible = false;
+		this.Snow.visible = false;
+		this.Mist.visible = false;
+
+		//this.stop();
+
+		window.Weather = this;
+	}
+
+	// actions tween:
+	this.timeline.addTween(cjs.Tween.get(this).call(this.frame_0).wait(1));
+
+	// Clear
+	this.Clear = new lib.sunny();
+	this.Clear.setTransform(919.8,262.6,1,1,0,0,0,339.6,170.6);
+
+	this.timeline.addTween(cjs.Tween.get(this.Clear).wait(1));
+
+	// SunnyCloudy
+	this.SunnyCloudy = new lib.sunnycloudy();
+	this.SunnyCloudy.setTransform(402.6,226.6,1,1,0,0,0,339.6,170.6);
+
+	this.timeline.addTween(cjs.Tween.get(this.SunnyCloudy).wait(1));
+
+	// Cloudy
+	this.Cloudy = new lib.cloudy();
+	this.Cloudy.setTransform(402.6,226.6,1,1,0,0,0,339.6,170.6);
+
+	this.timeline.addTween(cjs.Tween.get(this.Cloudy).wait(1));
+
+	// GrayCloudy
+	this.GrayCloudy = new lib.graycloudy();
+	this.GrayCloudy.setTransform(402.6,226.6,1,1,0,0,0,339.6,170.6);
+
+	this.timeline.addTween(cjs.Tween.get(this.GrayCloudy).wait(1));
+
+	// Shower
+	this.Shower = new lib.shower();
+	this.Shower.setTransform(964.3,307.1,1,1,0,0,0,339.6,170.6);
+
+	this.timeline.addTween(cjs.Tween.get(this.Shower).wait(1));
+
+	// Rain
+	this.Rain = new lib.rain();
+	this.Rain.setTransform(711.1,304.4);
+
+	this.timeline.addTween(cjs.Tween.get(this.Rain).wait(1));
+
+	// Thunderstorm
+	this.Thunderstorm = new lib.thunderstorm();
+	this.Thunderstorm.setTransform(919.8,262.6,1,1,0,0,0,339.6,170.6);
+
+	this.timeline.addTween(cjs.Tween.get(this.Thunderstorm).wait(1));
+
+	// Snow
+	this.Snow = new lib.weather();
+	this.Snow.setTransform(588.2,469.1,1,1,0,0,0,339.6,170.6);
+
+	this.timeline.addTween(cjs.Tween.get(this.Snow).wait(1));
+
+	// Mist
+	this.Mist = new lib.mist();
+	this.Mist.setTransform(402.6,226.6,1,1,0,0,0,339.6,170.6);
+
+	this.timeline.addTween(cjs.Tween.get(this.Mist).wait(1));
+
+	// Sun
+	this.Sun = new lib.sun_1();
+	this.Sun.setTransform(919.8,262.6,1,1,0,0,0,339.6,170.6);
+
+	this.timeline.addTween(cjs.Tween.get(this.Sun).wait(1));
+
+	// Moon
+	this.Moon = new lib.moon();
+	this.Moon.setTransform(919.8,262.6,1,1,0,0,0,339.6,170.6);
+
+	this.timeline.addTween(cjs.Tween.get(this.Moon).wait(1));
+
+	// Day
+	this.Day = new lib.day();
+	this.Day.setTransform(150,150,1,1,0,0,0,150,150);
+
+	this.timeline.addTween(cjs.Tween.get(this.Day).wait(1));
+
+	// Night
+	this.Night = new lib.night();
+	this.Night.setTransform(150,150,1,1,0,0,0,150,150);
+
+	this.timeline.addTween(cjs.Tween.get(this.Night).wait(1));
+
+}).prototype = p = new cjs.MovieClip();
+p.nominalBounds = new cjs.Rectangle(-152.6,-245.6,3239.9,1860.9);
 
 
 // symbols:
-
-
-
 (lib.cloud1 = function() {
 	this.initialize(img.cloud1);
 }).prototype = p = new cjs.Bitmap();
@@ -125,12 +231,13 @@ p.nominalBounds = new cjs.Rectangle(-182.3,391.9,747.1,225.1);
 
 (lib.rain = function(mode,startPosition,loop) {
 	this.initialize(mode,startPosition,loop,{});
+	var self = this;
 
 	// timeline functions:
 	this.frame_0 = function() {
 		//		'libs/gsap/TweenMax.min.js',
 		//		'libs/gsap/easing/EasePack.min.js'
-		
+
 		// vars -------------------------------------------
 		var particleCount = 50;
 		var angleOffset = -400;// subtract this from rain xSpawnPosition, tween to that position, for angled motion
@@ -144,40 +251,48 @@ p.nominalBounds = new cjs.Rectangle(-182.3,391.9,747.1,225.1);
 		var max_tweenDelay = .7;
 		var testx = 600;
 		var testy = 0
-		
+
 		var arrayParticles = [];// Edge
 		var arrayParticleElements = [];// for CSS
-		
+
 		// funcs -------------------------------------------
 		init();
+		//var self = this;
+		console.log("1",self);
+
 		function init(){
-		
+
 			for(var i=0; i<particleCount; i++){
 				// add dynamic particles to stage
 				//var particle = sym.createChildSymbol("RainDrop", "particleHolder");
-		
-				var particle = new lib.raindrop();
-				console.log(particle);
-				
-				particle.x = testx;
-				particle.y = testy;
+
+				/*this.instance = new lib.fullmoon();
+
+				this.addChild(this.instance);*/
+
+				self.instance = new lib.raindrop();
+				//console.log(particle);
+
+				self.instance.x = testx;
+				self.instance.y = testy;
 				testy = testy + 10;
-				this.stage.addChild(particle);
-		
+				//console.log("2",self);
+				self.addChild(self.instance);;
+
 				//var particleElement = particle.getSymbolElement();
-		
+
 				//tweenParticle(particleElement);
-		
+
 				//arrayParticles.push(particle);
 				//arrayParticleElements.push(particleElement);
 			}
 		}
-		
+
 		function tweenParticle( particleElement ){
-			// position	
-			var xPos_start = getRandomInRangeRounded(min_spawnXPosition, max_spawnXPosition);		
+			// position
+			var xPos_start = getRandomInRangeRounded(min_spawnXPosition, max_spawnXPosition);
 			particleElement.css({"position":"absolute", "left":xPos_start+"px", "top":yPos_start+"px"});
-		
+
 			// animate
 			var xPos_end = xPos_start + angleOffset;
 			var tweenTime = getRandomInRange(min_tweenTime, max_tweenTime);
@@ -190,25 +305,25 @@ p.nominalBounds = new cjs.Rectangle(-182.3,391.9,747.1,225.1);
 			// stop tween
 			for( var i=0; i<arrayParticleElements.length; i++ ){
 				// stop tween
-				TweenMax.killTweensOf( arrayParticleElements[i] );	
+				TweenMax.killTweensOf( arrayParticleElements[i] );
 			}
-		
-			// delete particles 
+
+			// delete particles
 			for( var a=0; a<arrayParticles.length; a++ ){
 				arrayParticles[a].deleteSymbol();
 			}
-		
+
 			arrayParticles = [];
 			arrayParticleElements = [];
 		}
-		
-		*/ 
+
+		*/
 		// utility funcs -------------------------------------------
-		
+
 		function getRandomInRange(start, end) {
 			return start + (Math.random() * (end - start));
 		}
-		
+
 		function getRandomInRangeRounded(start, end) {
 			return Math.round( start + (Math.random() * (end - start)) );
 		}
@@ -522,117 +637,6 @@ p.nominalBounds = new cjs.Rectangle(-410.5,-255.5,2176.1,955.3);
 	this.addChild(this.instance);
 }).prototype = p = new cjs.Container();
 p.nominalBounds = new cjs.Rectangle(-410.5,-255.5,2582.8,986.8);
-
-
-// stage content:
-(lib.weathercanvas = function(mode,startPosition,loop) {
-	this.initialize(mode,startPosition,loop,{});
-
-	// timeline functions:
-	this.frame_0 = function() {
-		this.Day.visible = false;
-		this.Night.visible = false;
-		this.Sun.visible = false;
-		this.Moon.visible = false;
-		
-		this.Clear.visible = false;
-		this.SunnyCloudy.visible = false;
-		this.Cloudy.visible = false;
-		this.GrayCloudy.visible = false;
-		this.Shower.visible = false;
-		//this.Rain.visible = false;
-		this.Thunderstorm.visible = false;
-		this.Snow.visible = false;
-		this.Mist.visible = false;
-		
-		//this.stop();
-		
-		window.Weather = this;
-	}
-
-	// actions tween:
-	this.timeline.addTween(cjs.Tween.get(this).call(this.frame_0).wait(1));
-
-	// Clear
-	this.Clear = new lib.sunny();
-	this.Clear.setTransform(919.8,262.6,1,1,0,0,0,339.6,170.6);
-
-	this.timeline.addTween(cjs.Tween.get(this.Clear).wait(1));
-
-	// SunnyCloudy
-	this.SunnyCloudy = new lib.sunnycloudy();
-	this.SunnyCloudy.setTransform(402.6,226.6,1,1,0,0,0,339.6,170.6);
-
-	this.timeline.addTween(cjs.Tween.get(this.SunnyCloudy).wait(1));
-
-	// Cloudy
-	this.Cloudy = new lib.cloudy();
-	this.Cloudy.setTransform(402.6,226.6,1,1,0,0,0,339.6,170.6);
-
-	this.timeline.addTween(cjs.Tween.get(this.Cloudy).wait(1));
-
-	// GrayCloudy
-	this.GrayCloudy = new lib.graycloudy();
-	this.GrayCloudy.setTransform(402.6,226.6,1,1,0,0,0,339.6,170.6);
-
-	this.timeline.addTween(cjs.Tween.get(this.GrayCloudy).wait(1));
-
-	// Shower
-	this.Shower = new lib.shower();
-	this.Shower.setTransform(964.3,307.1,1,1,0,0,0,339.6,170.6);
-
-	this.timeline.addTween(cjs.Tween.get(this.Shower).wait(1));
-
-	// Rain
-	this.Rain = new lib.rain();
-	this.Rain.setTransform(711.1,304.4);
-
-	this.timeline.addTween(cjs.Tween.get(this.Rain).wait(1));
-
-	// Thunderstorm
-	this.Thunderstorm = new lib.thunderstorm();
-	this.Thunderstorm.setTransform(919.8,262.6,1,1,0,0,0,339.6,170.6);
-
-	this.timeline.addTween(cjs.Tween.get(this.Thunderstorm).wait(1));
-
-	// Snow
-	this.Snow = new lib.weather();
-	this.Snow.setTransform(588.2,469.1,1,1,0,0,0,339.6,170.6);
-
-	this.timeline.addTween(cjs.Tween.get(this.Snow).wait(1));
-
-	// Mist
-	this.Mist = new lib.mist();
-	this.Mist.setTransform(402.6,226.6,1,1,0,0,0,339.6,170.6);
-
-	this.timeline.addTween(cjs.Tween.get(this.Mist).wait(1));
-
-	// Sun
-	this.Sun = new lib.sun_1();
-	this.Sun.setTransform(919.8,262.6,1,1,0,0,0,339.6,170.6);
-
-	this.timeline.addTween(cjs.Tween.get(this.Sun).wait(1));
-
-	// Moon
-	this.Moon = new lib.moon();
-	this.Moon.setTransform(919.8,262.6,1,1,0,0,0,339.6,170.6);
-
-	this.timeline.addTween(cjs.Tween.get(this.Moon).wait(1));
-
-	// Day
-	this.Day = new lib.day();
-	this.Day.setTransform(150,150,1,1,0,0,0,150,150);
-
-	this.timeline.addTween(cjs.Tween.get(this.Day).wait(1));
-
-	// Night
-	this.Night = new lib.night();
-	this.Night.setTransform(150,150,1,1,0,0,0,150,150);
-
-	this.timeline.addTween(cjs.Tween.get(this.Night).wait(1));
-
-}).prototype = p = new cjs.MovieClip();
-p.nominalBounds = new cjs.Rectangle(-152.6,-245.6,3239.9,1860.9);
 
 })(weatherlib = weatherlib||{}, weatherimages = weatherimages||{}, createjs = createjs||{});
 var weatherlib, weatherimages, createjs;

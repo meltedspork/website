@@ -11,12 +11,20 @@ lib.properties = {
 	manifest: []
 };
 
+// stage content:
+(lib.app = function() {
+	this.initialize();
+
+	// Layer 1
+	this.instance = new lib.logo();
+	this.instance.setTransform(305.5,115.9,1,1,0,0,0,214.5,69.9);
+
+	this.addChild(this.instance);
+}).prototype = p = new cjs.Container();
+p.nominalBounds = new cjs.Rectangle(391,146,428.9,136.8);
 
 
 // symbols:
-
-
-
 (lib.logo = function() {
 	this.initialize();
 
@@ -35,19 +43,6 @@ lib.properties = {
 	this.addChild(this.shape,this.text);
 }).prototype = p = new cjs.Container();
 p.nominalBounds = new cjs.Rectangle(0,0,428.9,136.8);
-
-
-// stage content:
-(lib.app = function() {
-	this.initialize();
-
-	// Layer 1
-	this.instance = new lib.logo();
-	this.instance.setTransform(305.5,115.9,1,1,0,0,0,214.5,69.9);
-
-	this.addChild(this.instance);
-}).prototype = p = new cjs.Container();
-p.nominalBounds = new cjs.Rectangle(391,146,428.9,136.8);
 
 })(libapp = libapp||{}, images = images||{}, createjs = createjs||{});
 var libapp, images, createjs;
