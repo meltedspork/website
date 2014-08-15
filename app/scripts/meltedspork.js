@@ -39,7 +39,6 @@ define([
                 '</ul>');
         }*/
     }))({el: document.body});
-    window.MeltedSpork = MeltedSpork;
-    window.canvas = window.canvas||{};
+    window.MS = MeltedSpork;
     return MeltedSpork;
 });
