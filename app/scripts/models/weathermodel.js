@@ -75,7 +75,8 @@ define([
         },
 
         displayWeather: function(canvas,api) {
-            canvas[api.get('condition')[0]].visible = true;
+            //canvas[api.get('condition')[0]].visible = true;
+            canvas[api.get('condition')[0]].init();
             canvas[api.get('period')[0]].visible = true;
         },
 

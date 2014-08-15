@@ -74,14 +74,14 @@ define([
             //console.log("export", exportRoot);
 
             var canvas = document.getElementById("canvas");
-            var stage = new createjs.Stage(canvas);
+            window.stage = new createjs.Stage(canvas);
 
 
             canvas.width = this.canvas.width;
             canvas.height = this.canvas.height;
 
-            stage.addChild(exportRoot);
-            stage.update();
+            window.stage.addChild(exportRoot);
+            window.stage.update();
             //console.log("stage:",stage);
 
             createjs.Ticker.setFPS(weatherlib.properties.fps);
@@ -90,7 +90,6 @@ define([
             $.when(exportRoot).done(function(){
                 that.model.getWeather(exportRoot,that.canvas);
             });
-            window.stage = stage;
 
             MS.Canvas.Weather = exportRoot;
 
