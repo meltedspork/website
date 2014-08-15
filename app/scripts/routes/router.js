@@ -8,7 +8,7 @@ define([
 	,'views/appview'
 
 //], function ($, Backbone, MeltedSpork, WeatherView) {
-], function ($, Backbone, App, WeatherView, AppView) {
+], function ($, Backbone, MeltedSpork, WeatherView, AppView) {
 	'use strict';
 
 	var Router = Backbone.Router.extend({

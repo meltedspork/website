@@ -31,15 +31,15 @@ define([
 
         initialize: function () {
             var that = this;
-            MeltedSpork.Views.Weather = this;
-            MeltedSpork.Models.Weather = new WeatherModel();
-            this.model = MeltedSpork.Models.Weather;
+            MS.Views.Weather = this;
+            MS.Models.Weather = new WeatherModel();
+            this.model = MS.Models.Weather;
 
             this.canvas.height = $(window).height();
             this.canvas.width = $(window).width();
 
-            //$.when(MeltedSpork.Models.weather.get_weather()).done(function(){
-                //MeltedSpork.Weather.Model = this.model;
+            //$.when(MS.Models.weather.get_weather()).done(function(){
+                //MS.Weather.Model = this.model;
                 that.render();
             //});
 
@@ -92,7 +92,7 @@ define([
             });
             window.stage = stage;
 
-            MeltedSpork.Canvas.Weather = exportRoot;
+            MS.Canvas.Weather = exportRoot;
 
         }
         ,output: function (api) {

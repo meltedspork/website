@@ -21,7 +21,7 @@ define([
         getWeather : function(canvas,size) {
             this.size = size;
             var self = this;
-            var api = MeltedSpork.API;
+            var api = MS.API;
 
             api.Zipcode = new ZipcodeAPI([],{zipcode: 60302});
 
