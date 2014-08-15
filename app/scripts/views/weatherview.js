@@ -80,9 +80,6 @@ define([
             canvas.width = this.canvas.width;
             canvas.height = this.canvas.height;
 
-    /*var test = (window.innerHeight/1366)*1;
-   exportRoot.scaleX = exportRoot.scaleY = test;*/
-
             stage.addChild(exportRoot);
             stage.update();
             //console.log("stage:",stage);
@@ -93,6 +90,7 @@ define([
             $.when(exportRoot).done(function(){
                 that.model.getWeather(exportRoot,that.canvas);
             });
+            window.stage = stage;
 
             MeltedSpork.Canvas.Weather = exportRoot;
 
