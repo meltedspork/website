@@ -32,7 +32,8 @@ define([
 		home : function() {
 			console.log("huh?");
 			var view = new AppView({
-				el: '.container'
+				el: '.container',
+				mid: 'container'
 			});
 		}
 

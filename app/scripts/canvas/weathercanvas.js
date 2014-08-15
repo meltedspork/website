@@ -3,6 +3,7 @@ var lib = lib||{};
 var images = images||{};
 window.weatherlib = lib;
 window.weatherimages = images;
+window.img = weatherimages;
 
 //(function (lib, img, cjs) {
 
@@ -15,13 +16,11 @@ lib.properties = {
 	fps: 24,
 	color: "#000000",
 	manifest: [
-		{src:"../../images/Bitmap1.png", id:"Bitmap1"},
-		{src:"../../images/Bitmap2.png", id:"Bitmap2"},
-		{src:"../../images/cloud1.png", id:"cloud1"},
-		{src:"../../images/cloud2.png", id:"cloud2"},
-		{src:"../../images/fullmoon.png", id:"fullmoon"},
-		{src:"../../images/raindrop.png", id:"raindrop"},
-		{src:"../../images/sun.png", id:"sun"}
+		{src:"images/cloud1.png", id:"cloud1"},
+		{src:"images/cloud2.png", id:"cloud2"},
+		{src:"images/fullmoon.png", id:"fullmoon"},
+		{src:"images/raindrop.png", id:"raindrop"},
+		{src:"images/sun.png", id:"sun"}
 	]
 };
 
@@ -29,44 +28,34 @@ lib.properties = {
 
 // symbols:
 
-(lib.Bitmap1 = function() {
-	this.initialize(weatherimg.Bitmap1);
-}).prototype = p = new cjs.Bitmap();
-p.nominalBounds = new cjs.Rectangle(0,0,1408,804);
-
-
-(lib.Bitmap2 = function() {
-	this.initialize(weatherimg.Bitmap2);
-}).prototype = p = new cjs.Bitmap();
-p.nominalBounds = new cjs.Rectangle(0,0,1520,846);
 
 
 (lib.cloud1 = function() {
-	this.initialize(weatherimg.cloud1);
+	this.initialize(img.cloud1);
 }).prototype = p = new cjs.Bitmap();
 p.nominalBounds = new cjs.Rectangle(0,0,709,491);
 
 
 (lib.cloud2 = function() {
-	this.initialize(weatherimg.cloud2);
+	this.initialize(img.cloud2);
 }).prototype = p = new cjs.Bitmap();
 p.nominalBounds = new cjs.Rectangle(0,0,606,358);
 
 
 (lib.fullmoon = function() {
-	this.initialize(weatherimg.fullmoon);
+	this.initialize(img.fullmoon);
 }).prototype = p = new cjs.Bitmap();
 p.nominalBounds = new cjs.Rectangle(0,0,1223,1223);
 
 
 (lib.raindrop = function() {
-	this.initialize(weatherimg.raindrop);
+	this.initialize(img.raindrop);
 }).prototype = p = new cjs.Bitmap();
 p.nominalBounds = new cjs.Rectangle(0,0,13,80);
 
 
 (lib.sun = function() {
-	this.initialize(weatherimg.sun);
+	this.initialize(img.sun);
 }).prototype = p = new cjs.Bitmap();
 p.nominalBounds = new cjs.Rectangle(0,0,263,257);
 
@@ -114,7 +103,7 @@ p.nominalBounds = new cjs.Rectangle(-404,344.1,993.2,510.8);
 p.nominalBounds = new cjs.Rectangle(0,0,679.2,341.2);
 
 
-(lib.Sun = function() {
+(lib.sun_1 = function() {
 	this.initialize();
 
 	// Layer 1
@@ -123,22 +112,20 @@ p.nominalBounds = new cjs.Rectangle(0,0,679.2,341.2);
 
 	this.addChild(this.instance);
 }).prototype = p = new cjs.Container();
-p.nominalBounds = new cjs.Rectangle(-639.2,-164.5,754.4,737.1);
+p.nominalBounds = new cjs.Rectangle(-639.2,-164.5,1329.3,737.1);
 
 
 (lib.night = function() {
 	this.initialize();
 
 	// Layer 1
-	this.instance = new lib.Bitmap2();
-	this.instance.setTransform(-111.9,846);
+	this.shape = new cjs.Shape();
+	this.shape.graphics.lf(["#152129","#000000"],[0.012,1],0,150,0,-150).s().p("A3aXbMAAAgu2MAu1AAAMAAAAu2g");
+	this.shape.setTransform(150,150);
 
-	this.instance_1 = new lib.Bitmap2();
-	this.instance_1.setTransform(-111.9,0);
-
-	this.addChild(this.instance_1,this.instance);
+	this.addChild(this.shape);
 }).prototype = p = new cjs.Container();
-p.nominalBounds = new cjs.Rectangle(-111.9,0,1520,1692);
+p.nominalBounds = new cjs.Rectangle(0,0,300,300);
 
 
 (lib.fullmoon_1 = function() {
@@ -168,11 +155,13 @@ p.nominalBounds = new cjs.Rectangle(0,0,46.7,73.2);
 	this.initialize();
 
 	// Layer 1
-	this.instance = new lib.Bitmap1();
+	this.shape = new cjs.Shape();
+	this.shape.graphics.lf(["#0099FF","#000066"],[0,1],0,150,0,-150).s().p("A3aXbMAAAgu2MAu1AAAMAAAAu2g");
+	this.shape.setTransform(150,150);
 
-	this.addChild(this.instance);
+	this.addChild(this.shape);
 }).prototype = p = new cjs.Container();
-p.nominalBounds = new cjs.Rectangle(0,0,1408,804);
+p.nominalBounds = new cjs.Rectangle(0,0,300,300);
 
 
 (lib.cloud3 = function() {
@@ -1193,7 +1182,7 @@ p.nominalBounds = new cjs.Rectangle(-410.5,-255.5,2582.8,986.8);
 	this.timeline.addTween(cjs.Tween.get(this.Mist).wait(1));
 
 	// Sun
-	this.Sun = new lib.Sun();
+	this.Sun = new lib.sun_1();
 	this.Sun.setTransform(919.8,262.6,1,1,0,0,0,339.6,170.6);
 
 	this.timeline.addTween(cjs.Tween.get(this.Sun).wait(1));
@@ -1206,20 +1195,21 @@ p.nominalBounds = new cjs.Rectangle(-410.5,-255.5,2582.8,986.8);
 
 	// Day
 	this.Day = new lib.day();
-	this.Day.setTransform(688.2,390.1,0.733,2.035,-90,0,0,704.1,402.1);
+	this.Day.setTransform(150,150,1,1,0,0,0,150,150);
 
 	this.timeline.addTween(cjs.Tween.get(this.Day).wait(1));
 
 	// Night
 	this.Night = new lib.night();
-	this.Night.setTransform(318.7,484.9,0.689,0.827,-90,0,0,704.1,402.1);
+	this.Night.setTransform(150,150,1,1,0,0,0,150,150);
 
 	this.timeline.addTween(cjs.Tween.get(this.Night).wait(1));
 
 }).prototype = p = new cjs.MovieClip();
 p.nominalBounds = new cjs.Rectangle(-152.6,-506.5,3239.9,2121.9);
 
-//})(lib = lib||{}, images = images||{}, createjs = createjs||{});
-//var lib, images, createjs;
-return lib;
+//})(weatherlib = weatherlib||{}, weatherimages = weatherimages||{}, createjs = createjs||{});
+//var weatherlib, weatherimages, createjs;
+
+return weatherlib;
 });

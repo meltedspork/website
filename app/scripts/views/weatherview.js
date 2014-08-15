@@ -5,12 +5,13 @@ define([
     ,'movieclip'
     ,'jquery'
     ,'underscore'
+    ,'bootstrap'
     ,'backbone'
     ,'templates'
     ,'canvas/weathercanvas'
     ,'models/weathermodel'
     //,'easeljs'
-], function (CreateJS, MovieClip, $, _, Backbone, JST, WeatherCanvas, WeatherModel) {
+], function (CreateJS, MovieClip, $, _, Bootstrap, Backbone, JST, WeatherCanvas, WeatherModel) {
 //], function ($, _, Backbone, JST, WeatherModel) {
     'use strict';
     var WeatherView = Backbone.View.extend({
@@ -24,11 +25,18 @@ define([
 
         events: {},
 */
+        id: 'container',
+
+        canvas: {},
+
         initialize: function () {
             var that = this;
             MeltedSpork.Views.Weather = this;
             MeltedSpork.Models.Weather = new WeatherModel();
             this.model = MeltedSpork.Models.Weather;
+
+            this.canvas.height = $(window).height();
+            this.canvas.width = $(window).width();
 
             //$.when(MeltedSpork.Models.weather.get_weather()).done(function(){
                 //MeltedSpork.Weather.Model = this.model;
@@ -39,16 +47,14 @@ define([
         }
         ,render: function () {
             var that = this;
-            //this.$el.html('<canvas id="canvas" width="1366" height="768" style="background-color:#CCCCCC"></canvas>');
+
             this.$el.html(this.template(this.model.toJSON()));
-            /*
-            var container = document.getElementById('container');
-            container.style.width = document.body.clientWidth;
-            container.style.height = document.body.clientHeight;
-            container.style.overflow = "hidden";
-            */
+
+            document.getElementById(this.id).style.height=this.canvas.height+"px";
+            document.getElementById(this.id).style.width=this.canvas.width+"px";
+            document.getElementById(this.id).style.overflow="hidden";
+
             weatherimages = weatherimages||{};
-            //console.log("lib:",lib);
 
             var loader = new createjs.LoadQueue(false);
             loader.addEventListener("fileload", this.handleFileLoad);
@@ -60,16 +66,23 @@ define([
         }
         ,handleFileLoad: function (evt) {
             if (evt.item.type == "image") { weatherimages[evt.item.id] = evt.result; }
-            //console.log("images",images);
         }
         ,handleComplete: function(that) {
             window.weatherimg = weatherimages;
-            console.log("wi",weatherimg);
+
             var exportRoot = new weatherlib.weathercanvas();
             //console.log("export", exportRoot);
 
             var canvas = document.getElementById("canvas");
             var stage = new createjs.Stage(canvas);
+
+
+            canvas.width = this.canvas.width;
+            canvas.height = this.canvas.height;
+
+    /*var test = (window.innerHeight/1366)*1;
+   exportRoot.scaleX = exportRoot.scaleY = test;*/
+
             stage.addChild(exportRoot);
             stage.update();
             //console.log("stage:",stage);
@@ -78,10 +91,11 @@ define([
             createjs.Ticker.addEventListener("tick", stage);
 
             $.when(exportRoot).done(function(){
-                that.model.getWeather(exportRoot);
+                that.model.getWeather(exportRoot,that.canvas);
             });
 
-            that.exportRoot = exportRoot;
+            MeltedSpork.Canvas.Weather = exportRoot;
+
         }
         ,output: function (api) {
             console.log( api.toJSON());

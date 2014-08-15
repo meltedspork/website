@@ -7,14 +7,15 @@ define([
     'use strict';
 
     var WeatherAPI = Backbone.Model.extend({
-        url: function() { return this.defaults.staticData.url },
+        url: function() { return this.get('apiUrl') },
 
         initialize: function(models, options) {
-            this.defaults.dynamicData.city = options.city;
-            this.defaults.dynamicData.state = options.state;
+            this.set('apiCity', options.city);
+            this.set('apiState', options.state);
         },
 
         defaults: {
+            apiUrl : 'http://api.openweathermap.org/data/2.5/weather',
             /*
             **********************
             weather conditions
@@ -31,7 +32,6 @@ define([
             **********************
             */
             staticData: {
-                url : 'http://api.openweathermap.org/data/2.5/weather',
                 conditions : {
                     '01':['Clear',true],
                     '02':['SunnyCloudy',true],
@@ -47,8 +47,7 @@ define([
                     'd':['Day','Sun'],
                     'n':['Night','Moon']
                 }
-            },
-            dynamicData: {}
+            }
         },
 
         validate: function(attrs, options) {

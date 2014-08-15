@@ -15,7 +15,7 @@ var canvas, stage, exportRoot;
 
 function init() {
 	canvas = document.getElementById("canvas");
-	weatherimg = weatherimg||{};
+	weatherimages = weatherimages||{};
 
 	var loader = new createjs.LoadQueue(false);
 	loader.addEventListener("fileload", handleFileLoad);
@@ -24,7 +24,7 @@ function init() {
 }
 
 function handleFileLoad(evt) {
-	if (evt.item.type == "image") { weatherimg[evt.item.id] = evt.result; }
+	if (evt.item.type == "image") { weatherimages[evt.item.id] = evt.result; }
 }
 
 function handleComplete() {

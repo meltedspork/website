@@ -1,10 +1,10 @@
 /*global define*/
 
 define([
-    'underscore',
-    'backbone',
-    'apis/zipcodeapi',
-    'apis/weatherapi'
+    'underscore'
+    ,'backbone'
+    ,'apis/zipcodeapi'
+    ,'apis/weatherapi'
 ], function (_, Backbone, ZipcodeAPI, WeatherAPI) {
     'use strict';
 
@@ -18,17 +18,18 @@ define([
         defaults: {
         },
 
-        getWeather : function(that) {
+        getWeather : function(canvas,size) {
+            this.size = size;
             var self = this;
             var api = MeltedSpork.API;
 
-            api.Zipcode = new ZipcodeAPI([],{id: 60302});
+            api.Zipcode = new ZipcodeAPI([],{zipcode: 60302});
 
             api.Zipcode.fetch({
                 success: function () {
                     //self.output(api.Zipcode);
-                    var city = api.Zipcode.attributes.city;
-                    var state = api.Zipcode.attributes.state_short;
+                    var city = api.Zipcode.get('city');
+                    var state = api.Zipcode.get('state_short');
 
                     api.Weather = new WeatherAPI([],{
                         city: city,
@@ -38,15 +39,14 @@ define([
                     api.Weather.fetch({
                         data: { q: city + "," + state },
                         success: function () {
-                            var weatherData = api.Weather.attributes,
-                                weatherDynamic = weatherData.dynamicData,
-                                weatherStatic = weatherData.staticData,
-                                weatherIcon = weatherData.weather[0].icon;
+                            var weatherData = api.Weather,
+                                weatherStatic = weatherData.get('staticData'),
+                                weatherIcon = weatherData.get('weather')[0].icon;
 
-                            weatherDynamic.condition = weatherStatic.conditions[weatherIcon.replace(/\D/g, "")];
-                            weatherDynamic.period = weatherStatic.periods[weatherIcon.replace(/[^a-z]/gi, "")];
+                            weatherData.set('condition', weatherStatic.conditions[weatherIcon.replace(/\D/g, "")]);
+                            weatherData.set('period', weatherStatic.periods[weatherIcon.replace(/[^a-z]/gi, "")]);
 
-                            self.setWeather(that,api);
+                            self.setWeather(canvas,api);
                             //self.output(api.Weather);
                         }
                     });
@@ -54,16 +54,37 @@ define([
             });
         },
 
-        setWeather: function(that,api) {
+        setWeather: function(canvas,api) {
+            var weatherAPI = api.Weather;
 
-            //console.log("show weather");
-            var weatherAPI = api.Weather.attributes.dynamicData;/*,
-                weatherCanvas = MeltedSpork.Canvas.Weather;*/
+            $.when(
+                this.displayWeather(canvas,weatherAPI),
+                this.displaySunMoon(canvas,weatherAPI)
+            ).then(
+                this.setBackground(canvas,weatherAPI)
+            );
 
-            that[weatherAPI.condition[0]].visible = true;
-            that[weatherAPI.period[0]].visible = true;
-            if (weatherAPI.condition[1]) {
-                    that[weatherAPI.period[1]].visible = true;
+            var weatherAPI = api.Weather;
+
+
+
+        },
+
+        setBackground: function(canvas,api) {
+           canvas[api.get('period')[0]].shape.x = this.size.width/2;
+           canvas[api.get('period')[0]].shape.y = this.size.height/2;
+           canvas[api.get('period')[0]].shape.scaleX = this.size.width/300+.05;
+           canvas[api.get('period')[0]].shape.scaleY = this.size.height/300+.05;
+        },
+
+        displayWeather: function(canvas,api) {
+            canvas[api.get('condition')[0]].visible = true;
+            canvas[api.get('period')[0]].visible = true;
+        },
+
+        displaySunMoon: function(canvas,api) {
+            if (api.get('condition')[1]) {
+                canvas[api.get('period')[1]].visible = true;
             }
         },
 
