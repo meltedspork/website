@@ -12,7 +12,7 @@
     "easeljs": "",
     "createjs-tweenjs": "",
     "createjs-preloadjs": "",
-    "bootstrap": "~3.2.0"
+    "greensock": ""
   },
   "devDependencies": {}
 }
