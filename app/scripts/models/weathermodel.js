@@ -65,9 +65,6 @@ define([
             );
 
             var weatherAPI = api.Weather;
-
-
-
         },
 
         setBackground: function(canvas,api) {
