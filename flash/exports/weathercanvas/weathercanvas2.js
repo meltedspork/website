@@ -27,7 +27,7 @@ lib.properties = {
 		this.Night.visible = false;
 		this.Sun.visible = false;
 		this.Moon.visible = false;
-		
+
 		this.Clear.visible = false;
 		this.SunnyCloudy.visible = false;
 		this.Cloudy.visible = false;
@@ -37,9 +37,9 @@ lib.properties = {
 		this.Thunderstorm.visible = false;
 		this.Snow.visible = false;
 		this.Mist.visible = false;
-		
+
 		//this.stop();
-		
+
 		window.Weather = this;
 	}
 
@@ -384,7 +384,11 @@ p.nominalBounds = new cjs.Rectangle(0,84.5,2176.1,955.3);
 
 	// timeline functions:
 	this.frame_0 = function() {
-		var rainsCount = 200;
+		//		'libs/gsap/TweenMax.min.js',
+		//		'libs/gsap/easing/EasePack.min.js'
+
+		// vars -------------------------------------------
+		var particleCount = 200;
 		var angleOffset = -400;// subtract this from rain xSpawnPosition, tween to that position, for angled motion
 		var min_spawnXPosition = 0;
 		var max_spawnXPosition = 1366 + 300;//$('#Stage').width();
@@ -394,34 +398,83 @@ p.nominalBounds = new cjs.Rectangle(0,84.5,2176.1,955.3);
 		var max_tweenTime = 3;
 		var min_tweenDelay = .2;
 		var max_tweenDelay = .7;
-		
-		startRain();
-		function startRain(){
-		
-			for(var i=0; i<rainsCount; i++){
+
+		var arrayParticles = [];// Edge
+		var arrayParticleElements = [];// for CSS
+
+		// funcs -------------------------------------------
+		init();
+		function init(){
+
+			for(var i=0; i<particleCount; i++){
 				var xPos_start = getRandomInRangeRounded(min_spawnXPosition, max_spawnXPosition);
-		
-				this['raindrop_'+i] = new lib.drop();
-				this['raindrop_'+i].x = xPos_start;
-				this['raindrop_'+i].y = yPos_start;
-				stage.addChild(this['raindrop_'+i]);
-		
-				tweenRain(this['raindrop_'+i],xPos_start);
+				// add dynamic particles to stage
+				//var particle = sym.createChildSymbol("RainDrop", "particleHolder");
+
+				//var particle = new lib.raindrop();
+				//console.log(particle);
+				this['particle_'+i] = new lib.drop();
+				this['particle_'+i].x = xPos_start;
+				this['particle_'+i].y = yPos_start;
+
+				stage.addChild(this['particle_'+i]);
+
+				//var particleElement = particle.getSymbolElement();
+
+				tweenParticle(this['particle_'+i],xPos_start);
+				//tweenParticle(particleElement);
+
+				//arrayParticles.push(this['particle_'+i]);
+				//arrayParticleElements.push(particleElement);
 			}
 		}
-		
-		function tweenRain(raindrop,xPos_start){
+
+		function tweenParticle( particleElement,xPos_start ){
+			/*if (typeof xPos_start === 'undefined') {
+				xPos_start = getRandomInRangeRounded(min_spawnXPosition, max_spawnXPosition);
+				particleElement.y = 0;
+			}*/
+			//particleElement.y = yPos_start;
 			var tweenTime = getRandomInRange(min_tweenTime, max_tweenTime);
 			var tweenDelay = getRandomInRange(min_tweenDelay, max_tweenDelay);
 			var xPos_end = xPos_start + angleOffset;
-			
-			TweenMax.to(raindrop,tweenTime,{delay:tweenDelay, y:yPos_end, x:xPos_end, yoyo:false, repeat:-1, ease:Power2.easeIn});
+			//xPos_start = getRandomInRangeRounded(min_spawnXPosition, max_spawnXPosition);
+
+			TweenMax.to(particleElement,tweenTime,{delay:tweenDelay, y:yPos_end, x:xPos_end, yoyo:false, repeat:-1, ease:Power2.easeIn});
+			//TweenMax.to(particleElement,tweenTime,{delay:tweenDelay, y:yPos_end, x:xPos_end,
+			//	onComplete:tweenParticle, onCompleteParams:[particleElement,xPos_start], ease:Power2.easeIn});
+			// animate
+			/*var xPos_end = xPos_start + angleOffset;
+			var tweenTime = getRandomInRange(min_tweenTime, max_tweenTime);
+			var tweenDelay = getRandomInRange(min_tweenDelay, max_tweenDelay);
+			TweenMax.to(particleElement, tweenTime, {delay:tweenDelay, top:yPos_end+"px", left:xPos_end+"px",
+				onComplete:tweenParticle, onCompleteParams:[particleElement], ease:Power2.easeIn});
+			*/
 		}
-		
+		/*
+		this.killParticles = function(){
+			// stop tween
+			for( var i=0; i<arrayParticleElements.length; i++ ){
+				// stop tween
+				TweenMax.killTweensOf( arrayParticleElements[i] );
+			}
+
+			// delete particles
+			for( var a=0; a<arrayParticles.length; a++ ){
+				arrayParticles[a].deleteSymbol();
+			}
+
+			arrayParticles = [];
+			arrayParticleElements = [];
+		}
+
+		*/
+		// utility funcs -------------------------------------------
+
 		function getRandomInRange(start, end) {
 			return start + (Math.random() * (end - start));
 		}
-		
+
 		function getRandomInRangeRounded(start, end) {
 			return Math.round( start + (Math.random() * (end - start)) );
 		}
@@ -430,15 +483,17 @@ p.nominalBounds = new cjs.Rectangle(0,84.5,2176.1,955.3);
 	// actions tween:
 	this.timeline.addTween(cjs.Tween.get(this).call(this.frame_0).wait(1));
 
-	// raindrop
-	this.instance = new lib.drop();
-	this.instance.setTransform(-406.9,-192.5,1,1,0,0,0,23.4,36.6);
-	this.instance.visible = false;
+	// Layer 2
+	this.text = new cjs.Text("Rain", "96px 'Arial'", "#FFFF00");
+	this.text.textAlign = "center";
+	this.text.lineHeight = 98;
+	this.text.lineWidth = 321;
+	this.text.setTransform(15.4,-151);
 
-	this.timeline.addTween(cjs.Tween.get(this.instance).wait(1));
+	this.timeline.addTween(cjs.Tween.get({}).to({state:[{t:this.text}]}).wait(1));
 
 }).prototype = p = new cjs.MovieClip();
-p.nominalBounds = new cjs.Rectangle(-430.3,-229.1,46.7,73.2);
+p.nominalBounds = new cjs.Rectangle(-378.8,-167.1,558.8,186.1);
 
 
 (lib.moon = function() {
