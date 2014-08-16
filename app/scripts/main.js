@@ -53,6 +53,7 @@ require.config({
         //,tweenjs: '../bower_components/createjs-tweenjs/lib/tweenjs-0.5.1.min'
         //,movieclip: '../bower_components/easeljs/lib/movieclip-0.7.1.min'
         //,preloadjs: '../bower_components/createjs-preloadjs/lib/preloadjs-0.4.1.min'
+        ,greensock: '../bower_components/greensock/src/minified/TweenMax.min'
     }
 });
 /*
