@@ -43,8 +43,17 @@ define([
                                 weatherStatic = weatherData.get('staticData'),
                                 weatherIcon = weatherData.get('weather')[0].icon;
 
-                            weatherData.set('condition', weatherStatic.conditions[weatherIcon.replace(/\D/g, "")]);
-                            weatherData.set('period', weatherStatic.periods[weatherIcon.replace(/[^a-z]/gi, "")]);
+                            self.set('condition', weatherStatic.conditions[weatherIcon.replace(/\D/g, "")]);
+                            self.set('period', weatherStatic.periods[weatherIcon.replace(/[^a-z]/gi, "")]);
+
+                            MS.Views.Weather.showModal({
+                                name:self.get('condition')[0],
+                                condition: self.get('condition'),
+                                period: self.get('period')
+                            });
+
+                            weatherData.set('condition', self.get('condition'));
+                            weatherData.set('period', self.get('period'));
 
                             self.setWeather(canvas,api);
                             //self.output(api.Weather);

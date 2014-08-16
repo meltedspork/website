@@ -6,16 +6,18 @@ define([
     ,'jquery'
     ,'underscore'
     ,'bootstrap'
+    ,'greensock'
     ,'backbone'
     ,'templates'
     ,'canvas/weathercanvas'
     ,'models/weathermodel'
     //,'easeljs'
-], function (CreateJS, MovieClip, $, _, Bootstrap, Backbone, JST, WeatherCanvas, WeatherModel) {
+], function (CreateJS, MovieClip, $, _, Bootstrap, Greensock, Backbone, JST, WeatherCanvas, WeatherModel) {
 //], function ($, _, Backbone, JST, WeatherModel) {
     'use strict';
     var WeatherView = Backbone.View.extend({
         template: JST['app/scripts/templates/weather.ejs'],
+        modal: JST['app/scripts/templates/weathermodal.ejs'],
 /*
         tagName: 'div',
 
@@ -29,6 +31,8 @@ define([
 
         canvas: {},
 
+        model: {},
+
         initialize: function () {
             var that = this;
             MS.Views.Weather = this;
@@ -40,14 +44,13 @@ define([
 
             //$.when(MS.Models.weather.get_weather()).done(function(){
                 //MS.Weather.Model = this.model;
-                that.render();
+               that.render();
             //});
 
-            //this.listenTo(this.model, 'change', this.render);
+            //this.listenTo(this, 'change:period', this.showModal(), this);
         }
         ,render: function () {
             var that = this;
-
             this.$el.html(this.template(this.model.toJSON()));
 
             document.getElementById(this.id).style.height=this.canvas.height+"px";
@@ -96,6 +99,11 @@ define([
         }
         ,output: function (api) {
             console.log( api.toJSON());
+        }
+        ,showModal: function(collections) {
+            console.log(collections);
+            //this.$el.append(this.modal(this.model.toJSON()));
+            this.$el.append(this.modal(collections));
         }
     });
 
