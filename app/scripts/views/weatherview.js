@@ -16,8 +16,8 @@ define([
 //], function ($, _, Backbone, JST, WeatherModel) {
     'use strict';
     var WeatherView = Backbone.View.extend({
-        template: JST['app/scripts/templates/weather.ejs'],
-        modal: JST['app/scripts/templates/weathermodal.ejs'],
+        canvastemplate: JST['app/scripts/templates/weather.ejs'],
+        template: JST['app/scripts/templates/weatherinfo.ejs'],
 /*
         tagName: 'div',
 
@@ -51,7 +51,7 @@ define([
         }
         ,render: function () {
             var that = this;
-            this.$el.html(this.template(this.model.toJSON()));
+            this.$el.html(this.canvastemplate(this.model.toJSON()));
 
             document.getElementById(this.id).style.height=this.canvas.height+"px";
             document.getElementById(this.id).style.width=this.canvas.width+"px";
@@ -100,10 +100,8 @@ define([
         ,output: function (api) {
             console.log( api.toJSON());
         }
-        ,showModal: function(collections) {
-            console.log(collections);
-            //this.$el.append(this.modal(this.model.toJSON()));
-            this.$el.append(this.modal(collections));
+        ,displayView: function(collections) {
+            this.$el.prepend(this.template(collections));
         }
     });
 
