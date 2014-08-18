@@ -20,8 +20,8 @@ define([
 
         getWeather : function(canvas,size) {
             this.size = size;
-            var self = this;
-            var api = MS.API;
+            var self = this,
+                api = MS.API;
 
             api.Zipcode = new ZipcodeAPI([],{zipcode: 60302});
 
@@ -41,19 +41,29 @@ define([
                         success: function () {
                             var weatherData = api.Weather,
                                 weatherStatic = weatherData.get('staticData'),
+                                weatherMain = weatherData.get('main'),
                                 weatherIcon = weatherData.get('weather')[0].icon;
 
-                            self.set('condition', weatherStatic.conditions[weatherIcon.replace(/\D/g, "")]);
-                            self.set('period', weatherStatic.periods[weatherIcon.replace(/[^a-z]/gi, "")]);
+                                console.log(weatherMain);
+                            //weatherData.set('condition'
+                            //kelvinToFahrenheit
 
-                            MS.Views.Weather.showModal({
-                                name:self.get('condition')[0],
-                                condition: self.get('condition'),
-                                period: self.get('period')
+                            var fahrenheit = {
+                                temp: self.kelvinToFahrenheit(weatherMain.temp),
+                                temp_max: self.kelvinToFahrenheit(weatherMain.temp_max),
+                                temp_min: self.kelvinToFahrenheit(weatherMain.temp_min)
+                            };
+
+                            weatherData.set('fahrenheit', fahrenheit);
+                            weatherData.set('condition', weatherStatic.conditions[weatherIcon.replace(/\D/g, "")]);
+                            weatherData.set('period', weatherStatic.periods[weatherIcon.replace(/[^a-z]/gi, "")]);
+
+                            MS.Views.Weather.displayView({
+                              weather: weatherData.toJSON()
                             });
 
-                            weatherData.set('condition', self.get('condition'));
-                            weatherData.set('period', self.get('period'));
+                            //weatherData.set('condition', self.get('condition'));
+                            //weatherData.set('period', self.get('period'));
 
                             self.setWeather(canvas,api);
                             //self.output(api.Weather);
@@ -95,6 +105,9 @@ define([
             }
         },
 
+        kelvinToFahrenheit: function(temp) {
+            return Math.round((temp - 273.15) * 1.8000 + 32.00);
+        },
         validate: function(attrs, options) {
         },
 
