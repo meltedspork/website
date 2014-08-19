@@ -1,15 +1,18 @@
-<div id="weatherInfo" style="position: absolute; width: 50%; margin: 5px 50px">
+<div id="weatherInfo">
   <div class="row">
-  <div class="col-md-10" style="background-color:#ff0;">
-  <h1><%= weather.fahrenheit.temp %><small>&deg;F</small></h1><h1><%= weather.condition[0] %></h1>
-    <div class="row">
-      <div class="col-sm-6" style="background-color:#0f0;">
-        <h2><span class="glyphicon glyphicon-arrow-up"></span><%= weather.fahrenheit.temp %><small>&deg;F</small></h2>
-      </div>
-      <div class="col-sm-6" style="background-color:#00f;">
-        <h2><span class="glyphicon glyphicon-arrow-down"></span><%= weather.fahrenheit.temp %><small>&deg;F</small></h2>
+    <div class="col-md-10">
+    <h1><%= weather.fahrenheit.temp %><sup><small>&deg;F</small></sup></h1>
+    <h1><%= weather.condition[0] %></h1>
+      <div class="row">
+        <div class="col-sm-2">
+          <h2><span class="glyphicon glyphicon-arrow-up"></span>
+          <%= weather.fahrenheit.temp %><sup><small>&deg;F</small></sup></h2>
+        </div>
+        <div class="col-sm-2">
+          <h2><span class="glyphicon glyphicon-arrow-down"></span>
+          <%= weather.fahrenheit.temp %><sup><small>&deg;F</small></sup></h2>
+        </div>
       </div>
     </div>
   </div>
-</div>
 </div>
