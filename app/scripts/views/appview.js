@@ -1,16 +1,13 @@
 /*global define*/
 
 define([
-    //'easeljs'
-    'jquery'
+    'createjs'
+    ,'jquery'
     ,'underscore'
     ,'backbone'
     ,'templates'
-    ,'createjs'
     ,'canvas/app'
-    //,'appcanvas'
-//], function (EaselJS, $, _, Backbone, JST, AppCanvas) {
-], function ($, _, Backbone, JST, CreateJS, AppCanvas) {
+], function (EaselJS, $, _, Backbone, JST, AppCanvas) {
     'use strict';
     var AppView = Backbone.View.extend({
         template: JST['app/scripts/templates/weather.ejs'],

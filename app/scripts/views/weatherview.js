@@ -2,6 +2,8 @@
 
 define([
     'createjs'
+    ,'tweenjs'
+    ,'preloadjs'
     ,'movieclip'
     ,'jquery'
     ,'underscore'
@@ -12,7 +14,7 @@ define([
     ,'canvas/weathercanvas'
     ,'models/weathermodel'
     //,'easeljs'
-], function (CreateJS, MovieClip, $, _, Bootstrap, Greensock, Backbone, JST, WeatherCanvas, WeatherModel) {
+], function (CreateJS, TweenJS, PreloadJS, MovieClip, $, _, Bootstrap, Greensock, Backbone, JST, WeatherCanvas, WeatherModel) {
 //], function ($, _, Backbone, JST, WeatherModel) {
     'use strict';
     var WeatherView = Backbone.View.extend({
