@@ -1,11 +1,11 @@
 $icon-font-path: "/bower_components/sass-bootstrap/fonts/";
 
 $body-bg:			#000 !default;
-$gray-darker:		lighten(#fff, 13.5%) !default; // #222
-$gray-dark:			lighten(#fff, 20%) !default;   // #333
-$gray:				lighten(#fff, 33.5%) !default; // #555
-$gray-light:		lighten(#fff, 46.7%) !default; // #777
-$gray-lighter:		lighten(#fff, 93.5%) !default; // #eee
+$gray-darker:		lighten(#fff, 13.5%) !default;
+$gray-dark:			lighten(#fff, 20%) !default;
+$gray:				lighten(#fff, 33.5%) !default;
+$gray-light:		lighten(#fff, 46.7%) !default;
+$gray-lighter:		lighten(#fff, 93.5%) !default;
 
 @mixin border-radius($topLeft, $topRight, $bottomRight, $bottomLeft) {
     -webkit-border-radius: $topLeft $topRight $bottomRight $bottomLeft;
@@ -24,37 +24,35 @@ $gray-lighter:		lighten(#fff, 93.5%) !default; // #eee
 .container {
     padding: 0;
     margin: 0;
-}
 
-.container #weatherInfo {
-	@include default-text-shadow();
-	position: absolute;
-	width: 100%;
-    margin: 0 auto;
-
-    .row {
+    /* [home]/weather */
+	#weatherInfo {
+		@include default-text-shadow();
+		position: absolute;
+		width: 100%;
     	margin: 0 auto;
 
-    	div {
-    		$textsize-h1: 50;
-    		h1 {
-    			font-size: $textsize-h1 + 'px';
-    		}
-    		h1:first-child {
-	    		font-size: ($textsize-h1 + 40) + 'px';
-	    	}
-	    	h1 {
-	    		margin-left: 20px;
+    	.row {
+    		margin: 0 auto;
+
+    		div {
+    			$textsize: 34px;
+    			h1 {
+    				font-size: ($textsize + 6px);
+    			}
+	    		h1 {
+	    			margin-left: 20px;
+
+	    			&:first-child {
+	    				font-size: ($textsize + 36px);
+	    			}
+	    		}
+	    		h2 {
+	    			font-size: $textsize;
+	    		}
 	    	}
     	}
     }
+    /* end #weatherInfo */
+
 }
-/*
-.row {
-	margin:0;
-	padding:0;
-}
-.col-md-10 {
-    @include border-radius(6px, 6px, 6px, 6px);
-    margin: 0 auto;
-}*/
