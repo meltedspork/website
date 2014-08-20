@@ -87,16 +87,16 @@ define([
         },
 
         setBackground: function(canvas,api) {
-           canvas[api.get('period')[0]].shape.x = this.size.width/2;
-           canvas[api.get('period')[0]].shape.y = this.size.height/2;
-           canvas[api.get('period')[0]].shape.scaleX = this.size.width/300+.05;
-           canvas[api.get('period')[0]].shape.scaleY = this.size.height/300+.05;
+            canvas.Period[api.get('period')[0]].shape.x = this.size.width/2;
+            canvas.Period[api.get('period')[0]].shape.y = this.size.height/2;
+            canvas.Period[api.get('period')[0]].shape.scaleX = this.size.width/300+.05;
+            canvas.Period[api.get('period')[0]].shape.scaleY = this.size.height/300+.05;
         },
 
         displayWeather: function(canvas,api) {
             //canvas[api.get('condition')[0]].visible = true;
             canvas[api.get('condition')[0]].init();
-            canvas[api.get('period')[0]].visible = true;
+            canvas.Period[api.get('period')[0]].init();
         },
 
         displaySunMoon: function(canvas,api) {
