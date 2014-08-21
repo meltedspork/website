@@ -1,1 +1,23 @@
 <canvas id="canvas" width="1366" height="768" style="background-color:#CCCCCC"></canvas>
+
+<div id="weathermodal" class="modal fade">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title">Weather data</h4>
+      </div>
+      <div class="modal-body">
+        <p>
+        	<form role="form">
+  				<div class="form-group">
+    				<label for="zipcode">Zipcode</label>
+    				<input type="zipcode" class="form-control" id="zipcode" placeholder="Enter Zipcode">
+  				</div>
+        </p>
+        <button type="button" class="btn btn-primary">Show me!</button>
+        </form>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
