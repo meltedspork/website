@@ -51,7 +51,7 @@ define([
                             };
 
                             weatherData.set('fahrenheit', fahrenheit);
-                            weatherData.set('condition', weatherStatic.conditions[weatherArr.icon.replace(/\D/g, "")]);
+                            weatherData.set('condition', weatherStatic.conditions['_' + weatherArr.icon.replace(/\D/g, "")]);
                             weatherData.set('period', weatherStatic.periods[weatherArr.icon.replace(/[^a-z]/gi, "")]);
                             weatherData.set('description',weatherArr.description);
 
