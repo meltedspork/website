@@ -42,11 +42,7 @@ define([
                             var weatherData = api.Weather,
                                 weatherStatic = weatherData.get('staticData'),
                                 weatherMain = weatherData.get('main'),
-                                weatherIcon = weatherData.get('weather')[0].icon;
-
-                                console.log(weatherMain);
-                            //weatherData.set('condition'
-                            //kelvinToFahrenheit
+                                weatherArr = weatherData.get('weather')[0];
 
                             var fahrenheit = {
                                 temp: self.kelvinToFahrenheit(weatherMain.temp),
@@ -55,8 +51,9 @@ define([
                             };
 
                             weatherData.set('fahrenheit', fahrenheit);
-                            weatherData.set('condition', weatherStatic.conditions[weatherIcon.replace(/\D/g, "")]);
-                            weatherData.set('period', weatherStatic.periods[weatherIcon.replace(/[^a-z]/gi, "")]);
+                            weatherData.set('condition', weatherStatic.conditions[weatherArr.icon.replace(/\D/g, "")]);
+                            weatherData.set('period', weatherStatic.periods[weatherArr.icon.replace(/[^a-z]/gi, "")]);
+                            weatherData.set('description',weatherArr.description);
 
                             MS.Views.Weather.displayView({
                               weather: weatherData.toJSON()
@@ -87,21 +84,20 @@ define([
         },
 
         setBackground: function(canvas,api) {
-            canvas.Period[api.get('period')[0]].shape.x = this.size.width/2;
-            canvas.Period[api.get('period')[0]].shape.y = this.size.height/2;
-            canvas.Period[api.get('period')[0]].shape.scaleX = this.size.width/300+.05;
-            canvas.Period[api.get('period')[0]].shape.scaleY = this.size.height/300+.05;
+            canvas.Periods[api.get('period')[0]].shape.x = this.size.width/2;
+            canvas.Periods[api.get('period')[0]].shape.y = this.size.height/2;
+            canvas.Periods[api.get('period')[0]].shape.scaleX = this.size.width/300+.05;
+            canvas.Periods[api.get('period')[0]].shape.scaleY = this.size.height/300+.05;
         },
 
         displayWeather: function(canvas,api) {
-            //canvas[api.get('condition')[0]].visible = true;
-            canvas[api.get('condition')[0]].init();
-            canvas.Period[api.get('period')[0]].init();
+            canvas.Conditions[api.get('condition')[0]].init();
+            canvas.Periods[api.get('period')[0]].init();
         },
 
         displaySunMoon: function(canvas,api) {
             if (api.get('condition')[1]) {
-                canvas[api.get('period')[1]].visible = true;
+                canvas.SolarSystem[api.get('period')[1]].visible = true;
             }
         },
 
