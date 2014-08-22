@@ -25,15 +25,29 @@ define([
             this.canvas = canvas;
             this.size = size;
 
-            $('#weatherModal').on('hidden.bs.modal', function () {
-                self.getWeather();
-            })
+            //$('#weatherSubmit').on("submit",function(event){
+            $('#weatherForm').submit(function(e){
+                e.preventDefault();
+                e.stopPropagation();
+
+                var weatherInput = $('#weatherInput').val();
+                if (weatherInput != '' && !isNaN(weatherInput)
+                    && weatherInput.length < 7 &&  weatherInput.length > 0) {
+                    $.when(
+                        self.getWeather(weatherInput)
+                    ).then(
+                        $('#weatherModal').modal('hide')
+                    );
+                } else {
+
+                }
+            });
         },
 
-        getWeather : function() {
+        getWeather : function(zipcode) {
             var self = this;
 
-            this.api.Zipcode = new ZipcodeAPI([],{zipcode: 60302});
+            this.api.Zipcode = new ZipcodeAPI([],{zipcode: zipcode});//60302});
 
             this.api.Zipcode.fetch({
                 success: function () {
@@ -48,7 +62,7 @@ define([
                     });
 
                     self.api.Weather.fetch({
-                        data: { q: city + "," + state },
+                        data: { q: city + ',' + state },
                         success: function () {
                             var weatherData = self.api.Weather,
                                 weatherStatic = weatherData.get('staticData'),
@@ -62,8 +76,8 @@ define([
                             };
 
                             weatherData.set('fahrenheit', fahrenheit);
-                            weatherData.set('condition', weatherStatic.conditions['_' + weatherArr.icon.replace(/\D/g, "")]);
-                            weatherData.set('period', weatherStatic.periods[weatherArr.icon.replace(/[^a-z]/gi, "")]);
+                            weatherData.set('condition', weatherStatic.conditions['_' + weatherArr.icon.replace(/\D/g, '')]);
+                            weatherData.set('period', weatherStatic.periods[weatherArr.icon.replace(/[^a-z]/gi, '')]);
                             weatherData.set('description',weatherArr.description);
 
                             MS.Views.Weather.displayView({

@@ -55,5 +55,9 @@ $gray-lighter:		lighten(#fff, 93.5%) !default;
     } /* end #weatherInfo */
     #weatherModal {
     	color: #000;
+
+    	input {
+    		color: #000;
+    	}
     }
 }

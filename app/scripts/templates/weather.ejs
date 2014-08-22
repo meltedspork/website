@@ -9,13 +9,13 @@
       </div>
       <div class="modal-body">
         <p>
-        	<form role="form">
+        	<form id="weatherForm" role="form">
   				<div class="form-group">
     				<label for="zipcode">Zipcode</label>
-    				<input type="zipcode" class="form-control" id="zipcode" placeholder="Enter Zipcode">
+    				<input id="weatherInput" type="zipcode" class="form-control" placeholder="Enter Zipcode" maxlength="6" minlength="6">
   				</div>
         </p>
-        <button id="weatherSubmit" type="button" class="btn btn-primary">Show me!</button>
+        <button id="weatherSubmit" type="submit" class="btn btn-primary">Show me!</button>
         </form>
       </div>
     </div><!-- /.modal-content -->
