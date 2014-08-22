@@ -94,7 +94,7 @@ define([
 
             $.when(exportRoot).done(function(){
                 that.model.askWeather(exportRoot,that.canvas);
-                $('#weatherModal').modal(open);
+                $('#weatherModal').modal({backdrop: 'static'});
             });
 
             MS.Canvas.Weather = exportRoot;
