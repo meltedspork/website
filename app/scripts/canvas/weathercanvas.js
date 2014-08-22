@@ -360,9 +360,10 @@ p.nominalBounds = new cjs.Rectangle(-430.3,-229.1,46.7,73.2);
 
 (lib.night = function(mode,startPosition,loop) {
 	this.initialize(mode,startPosition,loop,{});
-
 	// timeline functions:
 	this.frame_0 = function() {
+		//var self = this;
+
 		this.init = function(){
 			this.visible = true;
 			
@@ -374,6 +375,7 @@ p.nominalBounds = new cjs.Rectangle(-430.3,-229.1,46.7,73.2);
 				//setTransform(x,y,width,height)
 				this['star_'+i].setTransform(starX,starY,starSize,starSize,0,0,0,33,33);
 				stage.addChild(this['star_'+i]);
+				//self.timeline.addTween(cjs.Tween.get(self['star_'+i]).wait(1));
 			}
 			
 			function getRandomInRange(start, end) {
