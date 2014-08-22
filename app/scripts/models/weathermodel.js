@@ -8,7 +8,7 @@ define([
 ], function (_, Backbone, ZipcodeAPI, WeatherAPI) {
     'use strict';
 
-    var WeathermodelModel = Backbone.Model.extend({
+    var WeatherModel = Backbone.Model.extend({
         url: '',
 
         initialize: function() {
@@ -18,28 +18,39 @@ define([
         defaults: {
         },
 
-        getWeather : function(canvas,size) {
+        api : MS.API,
+
+        askWeather : function(canvas,size) {
+            var self = this;
+            this.canvas = canvas;
             this.size = size;
-            var self = this,
-                api = MS.API;
 
-            api.Zipcode = new ZipcodeAPI([],{zipcode: 60302});
+            $('#weatherModal').on('hidden.bs.modal', function () {
+                self.getWeather();
+            })
+        },
 
-            api.Zipcode.fetch({
+        getWeather : function() {
+            var self = this;
+
+            this.api.Zipcode = new ZipcodeAPI([],{zipcode: 60302});
+
+            this.api.Zipcode.fetch({
                 success: function () {
-                    //self.output(api.Zipcode);
-                    var city = api.Zipcode.get('city');
-                    var state = api.Zipcode.get('state_short');
+                    //self.output(self.api.Zipcode);
+                    var zipData = self.api.Zipcode.get('places')[0];
+                    var city = zipData['place name'];
+                    var state = zipData['state abbreviation'];
 
-                    api.Weather = new WeatherAPI([],{
+                    self.api.Weather = new WeatherAPI([],{
                         city: city,
                         state: state
                     });
 
-                    api.Weather.fetch({
+                    self.api.Weather.fetch({
                         data: { q: city + "," + state },
                         success: function () {
-                            var weatherData = api.Weather,
+                            var weatherData = self.api.Weather,
                                 weatherStatic = weatherData.get('staticData'),
                                 weatherMain = weatherData.get('main'),
                                 weatherArr = weatherData.get('weather')[0];
@@ -59,45 +70,41 @@ define([
                               weather: weatherData.toJSON()
                             });
 
-                            //weatherData.set('condition', self.get('condition'));
-                            //weatherData.set('period', self.get('period'));
-
-                            self.setWeather(canvas,api);
-                            //self.output(api.Weather);
+                            self.setWeather();
+                            //self.output(self.api.Weather);
                         }
                     });
                 }
             });
         },
 
-        setWeather: function(canvas,api) {
-            var weatherAPI = api.Weather;
+        setWeather: function() {
+            var weatherAPI = this.api.Weather;
 
             $.when(
-                this.displayWeather(canvas,weatherAPI),
-                this.displaySunMoon(canvas,weatherAPI)
+                this.displayWeather(weatherAPI),
+                this.displaySunMoon(weatherAPI)
             ).then(
-                this.setBackground(canvas,weatherAPI)
+                this.setBackground(weatherAPI)
             );
-
-            var weatherAPI = api.Weather;
         },
 
-        setBackground: function(canvas,api) {
-            canvas.Periods[api.get('period')[0]].shape.x = this.size.width/2;
-            canvas.Periods[api.get('period')[0]].shape.y = this.size.height/2;
-            canvas.Periods[api.get('period')[0]].shape.scaleX = this.size.width/300+.05;
-            canvas.Periods[api.get('period')[0]].shape.scaleY = this.size.height/300+.05;
+        setBackground: function(api) {
+            this.canvas.Periods[api.get('period')[0]].shape.x = this.size.width/2;
+            this.canvas.Periods[api.get('period')[0]].shape.y = this.size.height/2;
+            this.canvas.Periods[api.get('period')[0]].shape.scaleX = this.size.width/300+.05;
+            this.canvas.Periods[api.get('period')[0]].shape.scaleY = this.size.height/300+.05;
         },
 
-        displayWeather: function(canvas,api) {
-            canvas.Conditions[api.get('condition')[0]].init();
-            canvas.Periods[api.get('period')[0]].init();
+        displayWeather: function(api) {
+            this.canvas.Conditions[api.get('condition')[0]].init();
+            this.canvas.Periods[api.get('period')[0]].init();
         },
 
-        displaySunMoon: function(canvas,api) {
+        displaySunMoon: function(api) {
+            var self = this;
             if (api.get('condition')[1]) {
-                canvas.SolarSystem[api.get('period')[1]].visible = true;
+                self.canvas.SolarSystem[api.get('period')[1]].visible = true;
             }
         },
 
@@ -116,5 +123,5 @@ define([
         }
     });
 
-    return WeathermodelModel;
+    return WeatherModel;
 });

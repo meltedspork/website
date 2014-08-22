@@ -93,7 +93,8 @@ define([
             createjs.Ticker.addEventListener("tick", stage);
 
             $.when(exportRoot).done(function(){
-                that.model.getWeather(exportRoot,that.canvas);
+                that.model.askWeather(exportRoot,that.canvas);
+                $('#weatherModal').modal(open);
             });
 
             MS.Canvas.Weather = exportRoot;
