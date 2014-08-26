@@ -116,10 +116,7 @@ define([
         },
 
         displaySunMoon: function(api) {
-            var self = this;
-            if (api.get('condition')[1]) {
-                self.canvas.SolarSystem[api.get('period')[1]].visible = true;
-            }
+            this.canvas.SolarSystem[api.get('period')[1]].visible = true;
         },
 
         kelvinToFahrenheit: function(temp) {

@@ -33,15 +33,15 @@ define([
             */
             staticData: {
                 conditions : {
-                    _01:['Clear',true]
-                    ,_02:['SunnyCloudy',true]
-                    ,_03:['Cloudy',false]
-                    ,_04:['GrayCloudy',true]
-                    ,_09:['Shower',false]
-                    ,_10:['Rain',true]
-                    ,_11:['Thunderstorm',false]
-                    ,_13:['Snow',false]
-                    ,_50:['Mist',false]
+                    _01:['Clear']
+                    ,_02:['SunnyCloudy']
+                    ,_03:['Cloudy']
+                    ,_04:['GrayCloudy']
+                    ,_09:['Shower']
+                    ,_10:['Rain']
+                    ,_11:['Thunderstorm']
+                    ,_13:['Snow']
+                    ,_50:['Mist']
                 },
                 periods : {
                     d:['Day','Sun']
