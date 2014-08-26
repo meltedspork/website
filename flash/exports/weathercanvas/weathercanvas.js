@@ -7,14 +7,23 @@ lib.properties = {
 	width: 1366,
 	height: 768,
 	fps: 24,
-	color: "#000000",
+	color: "#FFFFFF",
 	manifest: [
 		{src:"images/cloud1.png", id:"cloud1"},
 		{src:"images/cloud2.png", id:"cloud2"},
+		{src:"images/firstquarter.png", id:"firstquarter"},
 		{src:"images/fullmoon.png", id:"fullmoon"},
+		{src:"images/lastquarter.png", id:"lastquarter"},
+		{src:"images/newmoon.png", id:"newmoon"},
+		{src:"images/oldmoon.png", id:"oldmoon"},
 		{src:"images/raindrop.png", id:"raindrop"},
 		{src:"images/star.png", id:"star"},
-		{src:"images/sun.png", id:"sun"}
+		{src:"images/sun.png", id:"sun"},
+		{src:"images/waningcrescent.png", id:"waningcrescent"},
+		{src:"images/waninggibbous.png", id:"waninggibbous"},
+		{src:"images/waxingcrescent.png", id:"waxingcrescent"},
+		{src:"images/waxinggibbous.png", id:"waxinggibbous"},
+		{src:"images/youngmoon.png", id:"youngmoon"}
 	]
 };
 
@@ -36,10 +45,34 @@ p.nominalBounds = new cjs.Rectangle(0,0,709,491);
 p.nominalBounds = new cjs.Rectangle(0,0,606,358);
 
 
+(lib.firstquarter = function() {
+	this.initialize(img.firstquarter);
+}).prototype = p = new cjs.Bitmap();
+p.nominalBounds = new cjs.Rectangle(0,0,600,600);
+
+
 (lib.fullmoon = function() {
 	this.initialize(img.fullmoon);
 }).prototype = p = new cjs.Bitmap();
-p.nominalBounds = new cjs.Rectangle(0,0,1223,1223);
+p.nominalBounds = new cjs.Rectangle(0,0,600,600);
+
+
+(lib.lastquarter = function() {
+	this.initialize(img.lastquarter);
+}).prototype = p = new cjs.Bitmap();
+p.nominalBounds = new cjs.Rectangle(0,0,600,600);
+
+
+(lib.newmoon = function() {
+	this.initialize(img.newmoon);
+}).prototype = p = new cjs.Bitmap();
+p.nominalBounds = new cjs.Rectangle(0,0,600,600);
+
+
+(lib.oldmoon = function() {
+	this.initialize(img.oldmoon);
+}).prototype = p = new cjs.Bitmap();
+p.nominalBounds = new cjs.Rectangle(0,0,600,600);
 
 
 (lib.raindrop = function() {
@@ -58,6 +91,48 @@ p.nominalBounds = new cjs.Rectangle(0,0,66,66);
 	this.initialize(img.sun);
 }).prototype = p = new cjs.Bitmap();
 p.nominalBounds = new cjs.Rectangle(0,0,263,257);
+
+
+(lib.waningcrescent = function() {
+	this.initialize(img.waningcrescent);
+}).prototype = p = new cjs.Bitmap();
+p.nominalBounds = new cjs.Rectangle(0,0,600,600);
+
+
+(lib.waninggibbous = function() {
+	this.initialize(img.waninggibbous);
+}).prototype = p = new cjs.Bitmap();
+p.nominalBounds = new cjs.Rectangle(0,0,600,600);
+
+
+(lib.waxingcrescent = function() {
+	this.initialize(img.waxingcrescent);
+}).prototype = p = new cjs.Bitmap();
+p.nominalBounds = new cjs.Rectangle(0,0,600,600);
+
+
+(lib.waxinggibbous = function() {
+	this.initialize(img.waxinggibbous);
+}).prototype = p = new cjs.Bitmap();
+p.nominalBounds = new cjs.Rectangle(0,0,600,600);
+
+
+(lib.youngmoon = function() {
+	this.initialize(img.youngmoon);
+}).prototype = p = new cjs.Bitmap();
+p.nominalBounds = new cjs.Rectangle(0,0,600,600);
+
+
+(lib.youngmoon_1 = function() {
+	this.initialize();
+
+	// Layer 1
+	this.instance = new lib.youngmoon();
+	this.instance.setTransform(0,0,1.028,1.028);
+
+	this.addChild(this.instance);
+}).prototype = p = new cjs.Container();
+p.nominalBounds = new cjs.Rectangle(0,0,616.7,616.7);
 
 
 (lib.weather = function(mode,startPosition,loop) {
@@ -83,6 +158,54 @@ p.nominalBounds = new cjs.Rectangle(0,0,263,257);
 
 }).prototype = p = new cjs.MovieClip();
 p.nominalBounds = new cjs.Rectangle(0,0,679.2,341.2);
+
+
+(lib.waxinggibbous_1 = function() {
+	this.initialize();
+
+	// Layer 1
+	this.instance = new lib.waxinggibbous();
+	this.instance.setTransform(0,0,1.028,1.028);
+
+	this.addChild(this.instance);
+}).prototype = p = new cjs.Container();
+p.nominalBounds = new cjs.Rectangle(0,0,616.7,616.7);
+
+
+(lib.waxingcrescent_1 = function() {
+	this.initialize();
+
+	// Layer 1
+	this.instance = new lib.waxingcrescent();
+	this.instance.setTransform(0,0,1.028,1.028);
+
+	this.addChild(this.instance);
+}).prototype = p = new cjs.Container();
+p.nominalBounds = new cjs.Rectangle(0,0,616.7,616.7);
+
+
+(lib.waninggibbous_1 = function() {
+	this.initialize();
+
+	// Layer 1
+	this.instance = new lib.waninggibbous();
+	this.instance.setTransform(0,0,1.028,1.028);
+
+	this.addChild(this.instance);
+}).prototype = p = new cjs.Container();
+p.nominalBounds = new cjs.Rectangle(0,0,616.7,616.7);
+
+
+(lib.waningcrescent_1 = function() {
+	this.initialize();
+
+	// Layer 1
+	this.instance = new lib.waningcrescent();
+	this.instance.setTransform(0,0,1.028,1.028);
+
+	this.addChild(this.instance);
+}).prototype = p = new cjs.Container();
+p.nominalBounds = new cjs.Rectangle(0,0,616.7,616.7);
 
 
 (lib.sunny = function(mode,startPosition,loop) {
@@ -126,15 +249,64 @@ p.nominalBounds = new cjs.Rectangle(-639.2,-164.5,1329.3,737.1);
 p.nominalBounds = new cjs.Rectangle(26.9,27.4,17.7,17.7);
 
 
+(lib.oldmoon_1 = function() {
+	this.initialize();
+
+	// Layer 1
+	this.instance = new lib.oldmoon();
+	this.instance.setTransform(0,0,1.028,1.028);
+
+	this.addChild(this.instance);
+}).prototype = p = new cjs.Container();
+p.nominalBounds = new cjs.Rectangle(0,0,616.7,616.7);
+
+
+(lib.newmoon_1 = function() {
+	this.initialize();
+
+	// Layer 1
+	this.instance = new lib.newmoon();
+	this.instance.setTransform(0,0,1.028,1.028);
+
+	this.addChild(this.instance);
+}).prototype = p = new cjs.Container();
+p.nominalBounds = new cjs.Rectangle(0,0,616.7,616.7);
+
+
+(lib.lastquarter_1 = function() {
+	this.initialize();
+
+	// Layer 1
+	this.instance = new lib.lastquarter();
+	this.instance.setTransform(0,0,1.028,1.028);
+
+	this.addChild(this.instance);
+}).prototype = p = new cjs.Container();
+p.nominalBounds = new cjs.Rectangle(0,0,616.7,616.7);
+
+
 (lib.fullmoon_1 = function() {
 	this.initialize();
 
 	// Layer 1
 	this.instance = new lib.fullmoon();
+	this.instance.setTransform(115.9,-65.9,1.826,1.826);
 
 	this.addChild(this.instance);
 }).prototype = p = new cjs.Container();
-p.nominalBounds = new cjs.Rectangle(0,0,1223,1223);
+p.nominalBounds = new cjs.Rectangle(115.9,-65.9,1095.6,1095.6);
+
+
+(lib.firstquarter_1 = function() {
+	this.initialize();
+
+	// Layer 1
+	this.instance = new lib.firstquarter();
+	this.instance.setTransform(0,0,1.028,1.028);
+
+	this.addChild(this.instance);
+}).prototype = p = new cjs.Container();
+p.nominalBounds = new cjs.Rectangle(0,0,616.7,616.7);
 
 
 (lib.drop = function() {
@@ -307,7 +479,7 @@ p.nominalBounds = new cjs.Rectangle(0,84.5,2176.1,955.3);
 		this.init = function(){
 			this.visible = true;
 			this.parent.rainmaker(50);
-			this.parent.parent.GrayCloudy.init();
+			this.parent.GrayCloudy.init();
 		}
 	}
 
@@ -333,7 +505,7 @@ p.nominalBounds = new cjs.Rectangle(-242.6,215.8,46.7,73.2);
 		this.init = function(){
 			this.visible = true;
 			this.parent.rainmaker(200);
-			this.parent.parent.Cloudy.init();
+			this.parent.Cloudy.init();
 		}
 	}
 
@@ -400,16 +572,87 @@ p.nominalBounds = new cjs.Rectangle(-430.3,-229.1,46.7,73.2);
 p.nominalBounds = new cjs.Rectangle(0,0,370.5,300);
 
 
-(lib.moon = function() {
-	this.initialize();
+(lib.moon = function(mode,startPosition,loop) {
+	this.initialize(mode,startPosition,loop,{});
 
-	// Layer 1
+	// timeline functions:
+	this.frame_0 = function() {
+		this.NewMoon.visible = false;
+		this.YoungMoon.visible = false;
+		this.WaxingCrescent.visible = false;
+		this.FirstQuarter.visible = false;
+		this.WaxingGibbous.visible = false;
+		this.WaningGibbous.visible = false;
+		this.LastQuarter.visible = false;
+		this.WaningCrescent.visible = false;
+		this.OldMoon.visible = false;
+	}
+
+	// actions tween:
+	this.timeline.addTween(cjs.Tween.get(this).call(this.frame_0).wait(1));
+
+	// oldmoon.png
+	this.OldMoon = new lib.oldmoon_1();
+	this.OldMoon.setTransform(-233.3,134.6,1,1,0,0,0,308.4,308.4);
+
+	this.timeline.addTween(cjs.Tween.get(this.OldMoon).wait(1));
+
+	// waningcrescent.png
+	this.WaningCrescent = new lib.waningcrescent_1();
+	this.WaningCrescent.setTransform(-232,134.9,1,1,0,0,0,308.4,308.4);
+
+	this.timeline.addTween(cjs.Tween.get(this.WaningCrescent).wait(1));
+
+	// lastquarter.png
+	this.LastQuarter = new lib.lastquarter_1();
+	this.LastQuarter.setTransform(-232,134.6,1,1,0,0,0,308.4,308.4);
+
+	this.timeline.addTween(cjs.Tween.get(this.LastQuarter).wait(1));
+
+	// waninggibbous.png
+	this.WaningGibbous = new lib.waninggibbous_1();
+	this.WaningGibbous.setTransform(-232.2,135.2,1,1,0,0,0,308.4,308.4);
+
+	this.timeline.addTween(cjs.Tween.get(this.WaningGibbous).wait(1));
+
+	// waxinggibbous.png
+	this.WaxingGibbous = new lib.waxinggibbous_1();
+	this.WaxingGibbous.setTransform(-233,135.7,1,1,0,0,0,308.4,308.4);
+
+	this.timeline.addTween(cjs.Tween.get(this.WaxingGibbous).wait(1));
+
+	// firstquarter.png
+	this.FirstQuarter = new lib.firstquarter_1();
+	this.FirstQuarter.setTransform(-234.5,135.1,1,1,0,0,0,308.4,308.4);
+
+	this.timeline.addTween(cjs.Tween.get(this.FirstQuarter).wait(1));
+
+	// waxingcrescent.png
+	this.WaxingCrescent = new lib.waxingcrescent_1();
+	this.WaxingCrescent.setTransform(-233.7,135,1,1,0,0,0,308.4,308.4);
+
+	this.timeline.addTween(cjs.Tween.get(this.WaxingCrescent).wait(1));
+
+	// youngmoon.png
+	this.YoungMoon = new lib.youngmoon_1();
+	this.YoungMoon.setTransform(-233.7,134.7,1,1,0,0,0,308.4,308.4);
+
+	this.timeline.addTween(cjs.Tween.get(this.YoungMoon).wait(1));
+
+	// newmoon.png
+	this.NewMoon = new lib.newmoon_1();
+	this.NewMoon.setTransform(-233.1,134.6,1,1,0,0,0,308.4,308.4);
+
+	this.timeline.addTween(cjs.Tween.get(this.NewMoon).wait(1));
+
+	// fullmoon
 	this.instance = new lib.fullmoon_1();
 	this.instance.setTransform(-262,208,0.562,0.562,0,0,0,611.5,611.5);
 
-	this.addChild(this.instance);
-}).prototype = p = new cjs.Container();
-p.nominalBounds = new cjs.Rectangle(-605.5,-135.4,687,687);
+	this.timeline.addTween(cjs.Tween.get(this.instance).wait(1));
+
+}).prototype = p = new cjs.MovieClip();
+p.nominalBounds = new cjs.Rectangle(-542.9,-173.8,619.2,617.8);
 
 
 (lib.mists = function(mode,startPosition,loop) {
@@ -555,7 +798,7 @@ p.nominalBounds = new cjs.Rectangle(-410.5,-255.5,2176.1,955.3);
 
 	// Moon
 	this.Moon = new lib.moon();
-	this.Moon.setTransform(978.9,335.1,1,1,0,0,0,339.6,170.6);
+	this.Moon.setTransform(926.8,402.2,1,1,0,0,0,339.6,170.6);
 
 	this.addChild(this.Moon,this.Sun);
 }).prototype = p = new cjs.Container();
