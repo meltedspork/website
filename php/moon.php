@@ -3,7 +3,10 @@ require '../vendor/autoload.php';
 
 $app = new \Slim\Slim();
 
-$app->response()->header('Content-Type', 'application/json;charset=utf-8');
+$app->view(new \JsonApiView());
+$app->add(new \JsonApiMiddleware());
+
+//$app->response()->header('Content-Type', 'application/json;charset=utf-8');
 
 /*
 * Adaptation en php du fameux et excellent scripte Astro-MoonPhase de Brett Hamilton écrit en Perl.
@@ -198,7 +201,7 @@ echo "And it lies at a distance of  ".number_format($MoonDist, 0, ',', '')." km 
 //list($MoonPhase, $MoonAge, $MoonDist, $MoonAng, $SunDist, $SunAng, $mpfrac) = Moon::phase(2011, 08, 24, 00, 00, 01);
 
 
-function lunarphase() {
+function lunarPhase() {
 
     $now = new DateTime();
 
@@ -216,8 +219,8 @@ function lunarphase() {
     //echo "MoonAge: $MoonAge<br>";
 
     $moon = new stdClass();
-    $moon->illuminated = $MoonPhase;
-    $moon->age = $MoonAge;
+    $moon->illuminated = (float)$MoonPhase;
+    $moon->age = (float)$MoonAge;
 
     if($MoonPhase < 1 && $MoonAge < 1) {
 	   // echo "New Moon";
@@ -273,11 +276,19 @@ function lunarphase() {
     	$moon->phase_name = "Full Moon";
     }
 
-    echo json_encode($moon);
+    $response = new stdClass();
+    $response->lunarphase = $moon;
+
+    return $response;
 }
 
-$app->get('/moon/:functionName', function ($functionName) {
-    call_user_func($functionName);
+$app->get('/moon/:functionName', function ($functionName) use ($app) {
+    if(is_callable($functionName)) {
+        $response = call_user_func($functionName);
+        $app->render(200,array(
+                'moon' => $response,
+            ));
+    }
 });
 
 $app->run();
