@@ -202,7 +202,6 @@ echo "And it lies at a distance of  ".number_format($MoonDist, 0, ',', '')." km 
 
 
 function lunarPhase() {
-    //date_default_timezone_set("America/Chicago");
     $now = new DateTime();
 
     $dateObj = array("Y","m","d","H","i","s");
