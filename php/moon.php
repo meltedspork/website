@@ -205,11 +205,11 @@ function lunarPhase() {
 
     $now = new DateTime();
 
-    $dateObj = array("Y","m","d","H","i","s");
-    $nowObj = array();
+    $dateObj = ["Y","m","d","H","i","s"];
+    $nowObj = [];
 
     foreach($dateObj as $obj) {
-        array_push($nowObj,date_format($now, $obj));
+	   $nowObj[] = date_format($now, $obj);
     }
 
     list($MoonPhase, $MoonAge, $MoonDist, $MoonAng, $SunDist, $SunAng, $mpfrac) = Moon::phase($nowObj[0], $nowObj[1], $nowObj[2], $nowObj[3], $nowObj[4], $nowObj[5]);
