@@ -7,8 +7,4 @@ $app->get('/hello/:name', function ($name) {
     echo "Hello, $name";
 });
 
-$app->get('/moon/:name', function ($name) {
-    echo "Moon: $name";
-});
-
 $app->run();
