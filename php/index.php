@@ -3,7 +3,7 @@ require '../vendor/autoload.php';
 
 $app = new \Slim\Slim();
 
-require 'moon.php';
+//require 'moon.php';
 
 $app->get('/hello/:name', function ($name) {
     echo "Hello, $name";
