@@ -281,6 +281,7 @@ function lunarPhase() {
     return $response;
 }
 
+
 $app->get('/moon/:functionName', function ($functionName) use ($app) {
     if(is_callable($functionName)) {
         $response = call_user_func($functionName);
@@ -290,4 +291,4 @@ $app->get('/moon/:functionName', function ($functionName) use ($app) {
     }
 });
 
-//$app->run();
+$app->run();
