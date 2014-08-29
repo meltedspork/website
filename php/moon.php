@@ -266,7 +266,7 @@ function lunarPhase() {
     		$moon->phase_name = "Waxing Gibbous";
     	} else {
     		// echo "Waning Gibbous";
-    		$moon->phase_code = 80;
+    		$moon->phase_code = 60;
     		$moon->phase_name = "Waning Gibbous";
     	}
     } else {
