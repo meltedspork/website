@@ -5,7 +5,8 @@ define([
     ,'backbone'
     ,'apis/zipcodeapi'
     ,'apis/weatherapi'
-], function (_, Backbone, ZipcodeAPI, WeatherAPI) {
+    ,'apis/moonapi'
+], function (_, Backbone, ZipcodeAPI, WeatherAPI, MoonAPI) {
     'use strict';
 
     var WeatherModel = Backbone.Model.extend({
@@ -24,6 +25,8 @@ define([
             var self = this;
             this.canvas = canvas;
             this.size = size;
+
+            self.getWeather(60606);
 
             //$('#weatherSubmit').on("submit",function(event){
             $('#weatherForm').submit(function(e){
@@ -84,8 +87,20 @@ define([
                               weather: weatherData.toJSON()
                             });
 
-                            self.setWeather();
-                            //self.output(self.api.Weather);
+                            self.api.Moon = new MoonAPI();
+
+                            self.api.Moon.fetch({
+                                success: function () {
+                                    var moon = self.api.Moon.get('moon').lunarphase;
+                                    self.api.Moon.set('phaseCode','_' + moon.phase_code);
+
+                                    var moon_name = self.api.Moon.get('staticData').phase[self.api.Moon.get('phaseCode')];
+                                    self.api.Moon.set('phaseName',moon_name);
+
+                                    self.setWeather();
+                                    //self.output(self.api.Weather);
+                                }
+                            });
                         }
                     });
                 }
@@ -94,10 +109,11 @@ define([
 
         setWeather: function() {
             var weatherAPI = this.api.Weather;
+            var moonAPI = this.api.Moon;
 
             $.when(
                 this.displayWeather(weatherAPI),
-                this.displaySunMoon(weatherAPI)
+                this.displaySunMoon(weatherAPI,moonAPI)
             ).then(
                 this.setBackground(weatherAPI)
             );
@@ -115,8 +131,8 @@ define([
             this.canvas.Periods[api.get('period')[0]].init();
         },
 
-        displaySunMoon: function(api) {
-            this.canvas.SolarSystem[api.get('period')[1]].visible = true;
+        displaySunMoon: function(api,moon) {
+            this.canvas.SolarSystem.init(api.get('period')[1],moon.get('phaseName'));
         },
 
         kelvinToFahrenheit: function(temp) {
