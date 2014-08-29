@@ -6,6 +6,8 @@ $app = new \Slim\Slim();
 $app->view(new \JsonApiView());
 $app->add(new \JsonApiMiddleware());
 
+$response->header('Access-Control-Allow-Origin', '*');
+
 //$app->response()->header('Content-Type', 'application/json;charset=utf-8');
 
 /*
