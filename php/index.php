@@ -1,16 +1,18 @@
 <?php
-//require '../vendor/autoload.php';
+require '../vendor/autoload.php';
 
-//$app = new \Slim\Slim();
-
-date_default_timezone_set("America/Chicago");
-
-require 'moon.php';
+$app = new \Slim\Slim();
 
 /*
-$app->get('/hello/:name', function ($name) {
-    echo "Hello, $name";
+$app->get('/sms/', function () {
+    require 'twilio/sms.php';
 });
 */
 
-//$app->run();
+$app->get('/moon/', function () {
+	date_default_timezone_set("America/Chicago");
+    require 'moon.php';
+});
+
+
+$app->run();
