@@ -1,5 +1,5 @@
 <?php
-require "/var/www/website-nodejs/vendor/autoload.php";
+require '/var/www/website-nodejs/vendor/autoload.php';
 
 function numberSms($app) {
     // start the session
@@ -81,7 +81,7 @@ function numberSms($app) {
 $app = new \Slim\Slim();
 
 $app->get("/sms/:functionName", function ($functionName) use ($app) {
-    /*$app->response()->header("Content-Type", "application/xml");
+    $app->response()->header("Content-Type", "application/xml");
 
     if(is_callable($functionName)) {
         $result = call_user_func($functionName,$app);
@@ -90,8 +90,7 @@ $app->get("/sms/:functionName", function ($functionName) use ($app) {
         $sms = $twilio->addChild("Sms",$result);
 
         echo $twilio->asXML();
-    }*/
-    echo getcwd();
+    }
 
 });
 

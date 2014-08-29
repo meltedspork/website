@@ -1,5 +1,5 @@
 <?php
-require '../vendor/autoload.php';
+require '/var/www/website-nodejs/vendor/autoload.php';
 
 $app = new \Slim\Slim();
 
