@@ -6,7 +6,6 @@ $app = new \Slim\Slim();
 $app->view(new \JsonApiView());
 $app->add(new \JsonApiMiddleware());
 
-$response->header('Access-Control-Allow-Origin', '*');
 
 //$app->response()->header('Content-Type', 'application/json;charset=utf-8');
 
@@ -287,6 +286,10 @@ function lunarPhase() {
 $app->get('/moon/:functionName', function ($functionName) use ($app) {
     if(is_callable($functionName)) {
         $response = call_user_func($functionName);
+
+        $response = $app->response();
+        $response->header('Access-Control-Allow-Origin', '*');
+
         $app->render(200,array(
                 'moon' => $response,
             ));
