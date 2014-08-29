@@ -225,15 +225,26 @@ p.nominalBounds = new cjs.Rectangle(0,0,616.7,616.7);
 p.nominalBounds = null;
 
 
-(lib.sun_1 = function() {
-	this.initialize();
+(lib.sun_1 = function(mode,startPosition,loop) {
+	this.initialize(mode,startPosition,loop,{});
 
-	// Layer 1
+	// timeline functions:
+	this.frame_0 = function() {
+		this.init = function(){
+			this.visible = true;
+		}
+	}
+
+	// actions tween:
+	this.timeline.addTween(cjs.Tween.get(this).call(this.frame_0).wait(1));
+
+	// Sun
 	this.instance = new lib.sun();
 	this.instance.setTransform(-639.2,-164.5,2.868,2.868);
 
-	this.addChild(this.instance);
-}).prototype = p = new cjs.Container();
+	this.timeline.addTween(cjs.Tween.get(this.instance).wait(1));
+
+}).prototype = p = new cjs.MovieClip();
 p.nominalBounds = new cjs.Rectangle(-639.2,-164.5,1329.3,737.1);
 
 
@@ -789,19 +800,35 @@ p.nominalBounds = new cjs.Rectangle(0,84.5,2582.8,986.8);
 p.nominalBounds = new cjs.Rectangle(-410.5,-255.5,2176.1,955.3);
 
 
-(lib.solar_system = function() {
-	this.initialize();
+(lib.solar_system = function(mode,startPosition,loop) {
+	this.initialize(mode,startPosition,loop,{});
+
+	// timeline functions:
+	this.frame_0 = function() {
+		this.init = function(period,moon){
+			this[period].visible = true;
+			if(moon != "FullMoon" && period == "Moon") {
+				this.Moon[moon].visible = true;
+			}
+		}
+	}
+
+	// actions tween:
+	this.timeline.addTween(cjs.Tween.get(this).call(this.frame_0).wait(1));
 
 	// Sun
 	this.Sun = new lib.sun_1();
 	this.Sun.setTransform(978.9,335.1,1,1,0,0,0,339.6,170.6);
 
+	this.timeline.addTween(cjs.Tween.get(this.Sun).wait(1));
+
 	// Moon
 	this.Moon = new lib.moon();
 	this.Moon.setTransform(926.8,402.2,1,1,0,0,0,339.6,170.6);
 
-	this.addChild(this.Moon,this.Sun);
-}).prototype = p = new cjs.Container();
+	this.timeline.addTween(cjs.Tween.get(this.Moon).wait(1));
+
+}).prototype = p = new cjs.MovieClip();
 p.nominalBounds = new cjs.Rectangle(0,0,754.4,737.1);
 
 
