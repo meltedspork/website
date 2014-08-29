@@ -1,5 +1,9 @@
 <?php
-require '/var/www/website-nodejs/vendor/autoload.php';
+<<<<<<< HEAD:php/twilio/sms.php
+require "/var/www/website-nodejs/vendor/autoload.php";
+=======
+require "../vendor/autoload.php";
+>>>>>>> 3cd16de112b0a5b52b666998ed8141f5c845a320:php/sms.php
 
 function numberSms($app) {
     // start the session
