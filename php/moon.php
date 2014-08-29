@@ -285,13 +285,13 @@ function lunarPhase() {
 
 $app->get('/moon/:functionName', function ($functionName) use ($app) {
     if(is_callable($functionName)) {
-        $response = call_user_func($functionName);
+        $result = call_user_func($functionName);
 
         $response = $app->response();
         $response->header('Access-Control-Allow-Origin', '*');
 
         $app->render(200,array(
-                'moon' => $response,
+                'moon' => $result,
             ));
     }
 });
