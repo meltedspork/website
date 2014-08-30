@@ -1,4 +1,4 @@
-<?php/*
+<?php
 require str_replace('php', '', __DIR__ ) . 'vendor/autoload.php';
 
 $app = new \Slim\Slim();
@@ -97,4 +97,3 @@ $app->get("/sms/:functionName", function ($functionName) use ($app) {
 });
 
 $app->run();
-*/
