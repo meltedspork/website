@@ -285,6 +285,8 @@ function lunarPhase() {
 
 $app->get('/moon/:functionName', function ($functionName) use ($app) {
     if(is_callable($functionName)) {
+        date_default_timezone_set("America/Chicago");
+
         $result = call_user_func($functionName);
 
         $response = $app->response();
