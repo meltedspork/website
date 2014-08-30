@@ -1,7 +1,7 @@
 <?php
-//require str_replace('php', '', __DIR__ ) . 'vendor/autoload.php';
-echo str_replace('php', '', __DIR__ ) . 'vendor/autoload.php';
-/*
+require str_replace('php', '', __DIR__ ) . 'vendor/autoload.php';
+//echo str_replace('php', '', __DIR__ ) . 'vendor/autoload.php';
+
 $app = new \Slim\Slim();
 
 
@@ -17,4 +17,3 @@ $app->get('/moon/', function () {
 
 
 $app->run();
-*/
