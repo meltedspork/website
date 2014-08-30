@@ -1,7 +1,9 @@
 <?php
 require str_replace('php', '', __DIR__ ) . 'vendor/autoload.php';
 
-$app = new \Slim\Slim();
+$app = new \Slim\Slim(array(
+    'debug' => true
+));
 
 function numberSms($app) {
     // start the session
