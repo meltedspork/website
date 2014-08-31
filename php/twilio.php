@@ -3,7 +3,7 @@ require str_replace('php', '', __DIR__ ) . 'vendor/autoload.php';
 
 $app = new \Slim\Slim();
 
-function numberSms($app) {
+function sms($app) {
     // start the session
     session_start();
 
@@ -79,7 +79,7 @@ function numberSms($app) {
     return $reply;
 }
 
-$app->get("/sms/:functionName", function ($functionName) use ($app) {
+$app->get("/twilio/:functionName", function ($functionName) use ($app) {
 
     if(is_callable($functionName)) {
         $app->response()->header("Content-Type", "application/xml");
