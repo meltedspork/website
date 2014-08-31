@@ -1,5 +1,3 @@
-AddType application/xml xml
-
 RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^ index.php [QSA,L]
