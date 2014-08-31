@@ -2,7 +2,6 @@
 require str_replace('php', '', __DIR__ ) . 'vendor/autoload.php';
 
 $app = new \Slim\Slim();
-$app->response()->header("Content-Type", "application/xml");
 
 function numberSms($app) {
     // start the session
@@ -80,9 +79,10 @@ function numberSms($app) {
     return $reply;
 }
 
-$app->get("/sms/:functionName", function ($functionName) use ($app) {
+$app->post("/sms/:functionName", function ($functionName) use ($app) {
 
     if(is_callable($functionName)) {
+        $app->response()->header("Content-Type", "application/xml");
 
         $result = call_user_func($functionName,$app);
 
