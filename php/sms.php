@@ -1,11 +1,8 @@
 <?php
 require str_replace('php', '', __DIR__ ) . 'vendor/autoload.php';
 
-$app = new \Slim\Slim(array(
-    'debug' => true
-));
+$app = new \Slim\Slim();
 
-function numberSms($app) {
     // start the session
     session_start();
 
@@ -40,6 +37,8 @@ function numberSms($app) {
 
     // save it
     $_SESSION['counter'] = $counter;
+
+function numberSms($app) {
 
 
     $reply = '';
