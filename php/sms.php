@@ -4,7 +4,6 @@ require str_replace('php', '', __DIR__ ) . 'vendor/autoload.php';
 $app = new \Slim\Slim();
 
 function numberSms($app) {
-    session_cache_limiter(false);
     // start the session
     session_start();
 
@@ -80,8 +79,6 @@ function numberSms($app) {
     }
     return $reply;
 }
-
-$app = new \Slim\Slim();
 
 $app->get("/sms/:functionName", function ($functionName) use ($app) {
     $app->response()->header("Content-Type", "application/xml");
