@@ -9,6 +9,7 @@ $app->view(new \JsonApiView());
 $app->add(new \JsonApiMiddleware());
 
 
+
 //$app->response()->header('Content-Type', 'application/json;charset=utf-8');
 
 /*

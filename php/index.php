@@ -10,7 +10,7 @@ $app->get('/:name', function ($name) {
 
 $app->get('/:filepath/:functionName', function ($filepath,$functionName) use ($app) {
 	require __DIR__.'/' . $filepath . '.php';
-	echo "functionName: ".$functionName;
+	//echo "functionName: ".$functionName;
 });
 
 $app->run();
