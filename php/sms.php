@@ -3,9 +3,11 @@ require str_replace('php', '', __DIR__ ) . 'vendor/autoload.php';
 
 $app = new \Slim\Slim();
 
+session_start();
+
 function numberSms($app) {
     // start the session
-    session_start();
+    //session_start();
 
     // get the session varible if it exists
     $counter = $_SESSION['counter'];
