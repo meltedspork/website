@@ -79,7 +79,7 @@ function numberSms($app) {
     return $reply;
 }
 
-$app->post("/sms/:functionName", function ($functionName) use ($app) {
+$app->get("/sms/:functionName", function ($functionName) use ($app) {
 
     if(is_callable($functionName)) {
         $app->response()->header("Content-Type", "application/xml");
