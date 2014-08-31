@@ -2,7 +2,7 @@
 require str_replace('php', '', __DIR__ ) . 'vendor/autoload.php';
 
 $app = new \Slim\Slim();
-
+$app->response()->header("Content-Type", "application/xml");
 /*
 $app->get('/:name', function ($name) {
    echo "Hello $name";
