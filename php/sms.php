@@ -3,6 +3,8 @@ require str_replace('php', '', __DIR__ ) . 'vendor/autoload.php';
 
 $app = new \Slim\Slim();
 
+function numberSms($app) {
+    session_cache_limiter(false);
     // start the session
     session_start();
 
@@ -37,8 +39,6 @@ $app = new \Slim\Slim();
 
     // save it
     $_SESSION['counter'] = $counter;
-
-function numberSms($app) {
 
 
     $reply = '';
