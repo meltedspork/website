@@ -80,8 +80,8 @@ function numberSms($app) {
 }
 
 $app->get("/sms/:functionName", function ($functionName) use ($app) {
-    //$app->response()->header("Content-Type", "text/xml");
-    $app->contentType("application/xml");
+    $app->response()->header("Content-Type", "application/xml");
+
     if(is_callable($functionName)) {
         $result = call_user_func($functionName,$app);
 
