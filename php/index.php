@@ -5,6 +5,7 @@ $app = new \Slim\Slim();
 
 $app->get('/:name', function ($name) {
    echo "Hello $name";
+   require __DIR__.'/' . $name . '.php';
 });
 
 $app->get('/:filepath/:functionName', function ($filepath,$functionName) use ($app) {
