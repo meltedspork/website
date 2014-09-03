@@ -32,5 +32,4 @@ app/bower_components
 test/bower_components/
 
 composer.phar
-composer.lock
 vendor
