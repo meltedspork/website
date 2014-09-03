@@ -2,11 +2,18 @@
 require_once str_replace("php", "", __DIR__ ) . "vendor/msconfig-php/settings.php";
 
 //get Zoho data
+/*
 $first = $_POST["FirstName"] ;
 $last = $_POST["LastName"];
 $phone = $_POST["Phone"];
 $mobile = $_POST["Mobile"];
 $action = $_POST["Action"];
+*/
+$first = $_GET["FirstName"] ;
+$last = $_GET["LastName"];
+$phone = $_GET["Phone"];
+$mobile = $_GET["Mobile"];
+$action = $_GET["Action"];
 
 if ($action == "newlead"){
 // add contact to SendHub
