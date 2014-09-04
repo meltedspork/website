@@ -2,20 +2,14 @@
 require_once str_replace("php", "", __DIR__ ) . "vendor/msconfig-php/settings.php";
 
 //get Zoho data
-/*
 $first = $_POST["FirstName"] ;
 $last = $_POST["LastName"];
 $phone = $_POST["Phone"];
 $mobile = $_POST["Mobile"];
 $action = $_POST["Action"];
-*/
-$first = $_GET["FirstName"] ;
-$last = $_GET["LastName"];
-$phone = $_GET["Phone"];
-$mobile = $_GET["Mobile"];
-$action = $_GET["Action"];
 
-if ($action == "newlead"){
+
+//if ($action == "newlead"){
 // add contact to SendHub
     $SendHubKey = $GLOBALS['shtoken'];
     $SendHubUser = $GLOBALS['shphone'];
@@ -33,17 +27,17 @@ if ($action == "newlead"){
 
     $qry = "?username={$SendHubUser}&api_key={$SendHubKey}";
 
-    $ch = curl_init(); 
-   
+    $ch = curl_init();
+
     curl_setopt($ch, CURLOPT_URL, 'https://api.sendhub.com/v1/contacts/'. $qry);
     curl_setopt($ch, CURLOPT_HTTPPOST, true);
-    curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);  
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);    
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
- 
+
     $result = curl_exec($ch);
     curl_close($ch);
     echo $result;
-}
+//}
 
 ?>
