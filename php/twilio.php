@@ -23,7 +23,8 @@ function sms($app) {
     $body = $app->request()->params("Body");
 
     if ($body != "") {
-        $temp_body = $body;//explode(",", $body)[0];
+        $temp_body = explode(",", $body);
+        $temp_body = $temp_body[0];
         $check_sms_app = ucfirst(strtolower($temp_body));
 
         foreach($funcObj as $obj) {
