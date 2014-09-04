@@ -30,7 +30,7 @@ function sms($app) {
         foreach($funcObj as $obj) {
             if ($obj == $check_sms_app) {
                 $_SESSION["sms_app"] = $check_sms_app;
-                $body = str_replace($temp_body . "", ",", $body);
+                $body = str_replace($temp_body . ",", "", $body);
                 $funcStr = true;
                 break;
             }
