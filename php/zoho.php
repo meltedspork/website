@@ -38,7 +38,7 @@ $app->get("/zoho(/(:methodName(/(:moduleName(/(:recordId))))))", function ($meth
 
 
 function callZoho($app, $methodName, $moduleName, $recordId) {
-
+/*
 	if ($methodName == null) {
 		throw new Exception("missing method router");
 	} else if ($moduleName == null) {
@@ -49,11 +49,11 @@ function callZoho($app, $methodName, $moduleName, $recordId) {
 		}
 	} else if (is_callable($methodName)) {
         //date_default_timezone_set("America/Chicago");
-	    $result = call_user_func($methodName, $app, $moduleName);
+	    $result = $call_user_func($methodName, $app, $moduleName);
 	} else {
     	$result = getCurl($methodName,$moduleName,null,$recordId);
-    }
-
+    }*/
+$result = $moduleName;//
 	$response = $app->response();
 	$response->header("Access-Control-Allow-Origin", "*");
 	$app->render(200,array(
