@@ -52,12 +52,16 @@ function callZoho($app, $methodName, $moduleName, $recordId) {
 	    $result = $call_user_func($methodName, $app, $moduleName);
 	} else {
     	$result = getCurl($methodName,$moduleName,null,$recordId);
-    }*/
-$result = $moduleName;//
+    }
 	$response = $app->response();
 	$response->header("Access-Control-Allow-Origin", "*");
 	$app->render(200,array(
 		"zoho" => $result,
+	));
+	*/
+	$app->render(200,array(
+		"method" => $methodName,
+		"module" => $moduleName,
 	));
 }
 
