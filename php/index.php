@@ -5,7 +5,7 @@ $app = new \Slim\Slim();
 $app->response()->header("Content-Type", "application/xml");
 
 $app->get('/:filepath/:functionName/(:varName)', function ($filepath,$functionName,$varName) use ($app) {
-	echo 'varName: '.$varName;
+	echo 'functionName: '.$functionName;
 	//require __DIR__.'/' . $filepath . '.php';
 });
 
