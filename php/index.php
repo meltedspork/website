@@ -5,7 +5,10 @@ $app = new \Slim\Slim();
 $app->response()->header("Content-Type", "application/xml");
 
 $app->get('/:filepath/:functionName', function ($filepath,$functionName) use ($app) {
-	echo 'filepath: '.$filepath;
+	$home = new SimpleXMLElement("<Route/>");
+    $route = $home->addChild("filepath",'test');
+	echo $home->asXML();
+
 	//require __DIR__.'/' . $filepath . '.php';
 });
 
