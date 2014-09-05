@@ -53,7 +53,7 @@ function callZoho($app, $methodName, $moduleName, $recordId) {
 	} else {
     	$result = getCurl($methodName,$moduleName,null,$recordId);
     }*/
-$result = $methodName;//
+$result = $moduleName;//
 	$response = $app->response();
 	$response->header("Access-Control-Allow-Origin", "*");
 	$app->render(200,array(
