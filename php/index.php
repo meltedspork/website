@@ -5,8 +5,8 @@ $app = new \Slim\Slim();
 $app->response()->header("Content-Type", "application/xml");
 
 $app->get('(/(:filepath(/(:functionName(/(:firstVar(/(:secondVar))))))))', function ($filepath=null,$functionName=null,$firstVar=null,$secondVar=null) use ($app) {
-	//require __DIR__.'/' . $filepath . '.php';
-
+	require __DIR__.'/' . $filepath . '.php';
+/*
 	$home = new SimpleXMLElement("<Route/>");
 	$route = $home->addChild("filepath",$filepath);
 	$route = $home->addChild("functionName",$functionName);
@@ -14,7 +14,7 @@ $app->get('(/(:filepath(/(:functionName(/(:firstVar(/(:secondVar))))))))', funct
 	$route = $home->addChild("secondVar",$secondVar);
 
 	echo $home->asXML();
-
+*/
 });
 
 $app->run();
