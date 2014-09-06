@@ -38,7 +38,7 @@ $app->get("/zoho(/(:methodName(/(:moduleName(/(:recordId))))))", function ($meth
 
 
 function callZoho($app, $methodName, $moduleName, $recordId) {
-/*
+
 	if ($methodName == null) {
 		throw new Exception("missing method router");
 	} else if ($moduleName == null) {
@@ -58,12 +58,13 @@ function callZoho($app, $methodName, $moduleName, $recordId) {
 	$app->render(200,array(
 		"zoho" => $result,
 	));
-	*/
 
+	/*
 	$app->render(200,array(
 		"method" => $methodName,
 		"module" => $moduleName,
 	));
+	*/
 }
 
 // show all methods available  from zoho
