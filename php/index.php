@@ -4,7 +4,7 @@ require str_replace('php', '', __DIR__ ) . 'vendor/autoload.php';
 $app = new \Slim\Slim();
 $app->response()->header("Content-Type", "application/xml");
 
-$app->get('(/(:filepath(/(:functionName(/(:firstVar(/(:secondVar))))))))', function ($filepath=null,$functionName=null,$firstVar=null,,$secondVar=null) use ($app) {
+$app->get('(/(:filepath(/(:functionName(/(:firstVar(/(:secondVar))))))))', function ($filepath=null,$functionName=null,$firstVar=null,$secondVar=null) use ($app) {
 	//require __DIR__.'/' . $filepath . '.php';
 
 	$home = new SimpleXMLElement("<Route/>");
