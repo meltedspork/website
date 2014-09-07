@@ -7,33 +7,37 @@ $app = new \Slim\Slim();
 $app->view(new \JsonApiView());
 $app->add(new \JsonApiMiddleware());
 
-function insertRecords($app, $moduleName) {
-	date_default_timezone_set ("America/Chicago") ;
+function insertRecords($app, $module) {
+/*	date_default_timezone_set ("America/Chicago") ;
+	$timeTag = date("Y/m/d G:i:s");*/
 
-	$timeTag = date("Y/m/d G:i:s");
+	$request = $app->request()->params();
 
-	$zoho = new SimpleXMLElement("<{$moduleName}/>");
-	$row = $zoho->addChild("row");
-	$row->addAttribute("no", "1");
-
-	$req = $app->request()->params();
-    foreach($req as $key=>$obj) {
-		$fl = $row->addChild("FL",$req[$key]);
-		$fl->addAttribute("val", $key);
+	if (!isset($request["Last_Name"])) {
+		throw new Exception("<Last Name> is missing, REASON: required");
+	} else if ($request["Last_Name"] == "") {
+		throw new Exception("<Last Name> can not be empty, REASON: required");
 	}
 
-	$xmlData = $zoho->asXML();
+	$xmlData = setXML($module,$request);
 
-	return getCurl($moduleName,"insertRecords",$xmlData,"json");
+	return getCurl("insertRecords", $module, $xmlData, null, "json");
 }
 
+function updateRecords($app, $module, $record) {
+	$request = $app->request()->params();
 
-$app->post("/zoho(/(:methodName(/(:moduleName(/(:recordId))))))", function ($methodName = null, $moduleName = null, $recordId = null) use ($app) {
-	callZoho($app, $methodName, $moduleName, $recordId);
+	$xmlData = setXML($module,$request);
+
+	return getCurl("updateRecords", $module, $xmlData, $record, "json");
+}
+
+$app->post("/zoho(/(:method(/(:module(/(:record))))))", function ($method = null, $module = null, $record = null) use ($app) {
+	callZoho($app, $method, $module, $record);
 });
 
-$app->get("/zoho(/(:methodName(/(:moduleName(/(:recordId))))))", function ($methodName = null, $moduleName = null, $recordId = null) use ($app) {
-	callZoho($app, $methodName, $moduleName, $recordId);
+$app->get("/zoho(/(:method(/(:module(/(:record))))))", function ($method = null, $module = null, $record = null) use ($app) {
+	callZoho($app, $method, $module, $record);
 });
 
 
@@ -41,28 +45,34 @@ function callZoho($app, $method, $module, $record) {
 	$routes = new stdClass();
 
 	if ($method == null) {
-		throw new Exception("missing method router");
+		throw new Exception("<method> router is missing");
 	} else {
 		$routes->method = $method;
 		$method = setMethod($method);
+
 		if ($module == null) {
 			try {
 				$result = call_user_func($method);
 			} catch(Exception $e) {
-				throw new Exception("missing module router");
+				throw new Exception("<module> router is missing");
 			}
 		} else {
 			$module = setModule($module);
 			$routes->module = $module;
+
 			try {
 				$result = call_user_func($method);
 			} catch(Exception $e) {
 				if (is_callable($method)) {
     	    		//date_default_timezone_set("America/Chicago");
-	    			$result = $call_user_func($method, $app, $module);
+    	    		if ($record == null) {
+		    			$result = call_user_func($method, $app, $module);
+		    		} else {
+		    			$result = call_user_func($method, $app, $module, $record);
+		    		}
 				} else {
 					//$routes->record = $record;
-    				$result = getCurl($method,$module,null,$record);
+    				$result = getCurl($method, $module, null, $record);
     			}
     		}
 		}
@@ -77,6 +87,22 @@ function callZoho($app, $method, $module, $record) {
 
 }
 
+function setXML($module, $request) {
+	$zoho = new SimpleXMLElement("<{$module}/>");
+	$row = $zoho->addChild("row");
+	$row->addAttribute("no", "1");
+
+    foreach($request as $key=>$obj) {
+    	$tempReqKey = str_replace("_", " ", $request[$key] );
+    	$tempKey = str_replace("_", " ", $key );
+
+		$fl = $row->addChild("FL",$tempReqKey);
+		$fl->addAttribute("val", $tempKey);
+	}
+
+	return $zoho->asXML();
+}
+
 function setMethod($method) {
 	$methods = showMethods();
 	foreach($methods as $obj) {
@@ -89,7 +115,7 @@ function setMethod($method) {
 	} else if (strtolower($method) == "showmodules") {
 		return "showModules";
 	}
-	throw new Exception($method . " method does not exist");
+	throw new Exception(" -" . $method . "- method does not exist");
 	return;
 }
 
@@ -100,7 +126,7 @@ function setModule($module) {
 			return $obj[0];
 		}
 	}
-	throw new Exception($module . " module does not exist");
+	throw new Exception(" -" . $module . "- module does not exist");
 	return;
 }
 
@@ -158,6 +184,7 @@ function showModules() {
 }
 
 function getCurl($method,$module,$xmlData,$record = null,$format = "json") {
+
 	$authtoken = $GLOBALS['ztoken'];
 
 	$url = "https://crm.zoho.com/crm/private/json/{$module}/{$method}?";
