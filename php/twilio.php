@@ -83,11 +83,10 @@ function sms($app) {
 }
 
 function smsInit($body) {
-    return "Send NUM,{number} for triva number: ".$body;//, TIME for current time, TEMP for current weather";
+    return "Send NUM,{number} for triva number: ".$body.", TIME,{zipcode} for current time";//, TEMP for current weather";
 }
 
 function smsNum($number) {
-
     if (!is_numeric($number) || $number == "" || $number == null) {
         $number = "random";
     }
@@ -105,22 +104,28 @@ function smsNum($number) {
     return $reply;
 }
 
-function smsTime($location) {
-    date_default_timezone_set("America/Chicago");
+function smsTime($zipcode) {
+    $url = "https://theeyestudio.com/zip/".$zipcode;
+
+    $response = getCurl($url);
+    $timezone = $response["results"]["timezone"];
+
+    date_default_timezone_set($timezone);
     return date("m/d/Y h:i:s a", time());
 }
 
 $app->get("/twilio/:functionName", function ($functionName) use ($app) {
 
     if(is_callable($functionName)) {
-        $app->response()->header("Content-Type", "application/xml");
+        //$app->response()->header("Content-Type", "application/xml");
 
         $result = call_user_func($functionName,$app);
 
         $twilio = new SimpleXMLElement("<Response/>");
         $sms = $twilio->addChild("Sms",$result);
 
-        echo $twilio->asXML();
+        //echo $twilio->asXML();
+        echo $result;
     }
 
 });
