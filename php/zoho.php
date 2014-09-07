@@ -37,21 +37,22 @@ $app->get("/zoho(/(:methodName(/(:moduleName(/(:recordId))))))", function ($meth
 });
 
 
-function callZoho($app, $methodName, $moduleName, $recordId) {
+function callZoho($app, $method, $module, $record) {
 
-	if ($methodName == null) {
+	if ($method == null) {
 		throw new Exception("missing method router");
-	} else if ($moduleName == null) {
+	} else if ($module == null) {
 		try {
-			$result = call_user_func($methodName);
+			$result = call_user_func($method);
 		} catch(Exception $e) {
 			throw new Exception("missing module router");
 		}
-	} else if (is_callable($methodName)) {
+	} else if (is_callable($method)) {
         //date_default_timezone_set("America/Chicago");
-	    $result = $call_user_func($methodName, $app, $moduleName);
+	    $result = $call_user_func($method, $app, $module);
 	} else {
-    	$result = getCurl($methodName,$moduleName,null,$recordId);
+    	//$result = getCurl($method,$module,null,$record);
+    	$result = setMethod($method,$module,$record);
     }
 	$response = $app->response();
 	$response->header("Access-Control-Allow-Origin", "*");
@@ -66,6 +67,17 @@ function callZoho($app, $methodName, $moduleName, $recordId) {
 		"record" => $recordId,
 	));
 	*/
+}
+
+function setMethod($method,$module,$record = null) {
+	$methods = showMethods();
+	foreach($methods as $obj) {
+		if (strtolower($method) == strtolower($obj[0])) {
+			return $obj[0];
+		}
+	}
+
+	//$result = getCurl($methodName,$moduleName,null,$recordId);
 }
 
 // show all methods available  from zoho
