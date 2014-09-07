@@ -115,7 +115,7 @@ function setMethod($method) {
 	} else if (strtolower($method) == "showmodules") {
 		return "showModules";
 	}
-	throw new Exception(" -" . $method . "- method does not exist");
+	throw new Exception("-" . $method . "- method does not exist");
 	return;
 }
 
@@ -126,7 +126,7 @@ function setModule($module) {
 			return $obj[0];
 		}
 	}
-	throw new Exception(" -" . $module . "- module does not exist");
+	throw new Exception("-" . $module . "- module does not exist");
 	return;
 }
 
