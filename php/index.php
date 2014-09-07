@@ -18,4 +18,8 @@ $app->get('(/(:filepath(/(:functionName(/(:firstVar(/(:secondVar))))))))', funct
 
 });
 
+$app->post('(/(:filepath(/(:functionName(/(:firstVar(/(:secondVar))))))))', function ($filepath=null,$functionName=null,$firstVar=null,$secondVar=null) use ($app) {
+	require __DIR__.'/' . $filepath . '.php';
+});
+
 $app->run();
