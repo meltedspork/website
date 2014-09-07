@@ -15,7 +15,7 @@ define([
         },
 
         defaults: {
-            apiUrl: 'https://theeyestudio.com/zip/'
+            apiUrl: 'https://theeyestudio.com/zip/postal/'
             //apiUrl: 'http://api.zippopotam.us/',
             //apiCountry: 'us/'
         },
