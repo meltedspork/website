@@ -109,8 +109,8 @@ function smsTime($zipcode) {
 
     $response = getCurl($url);
     $timezone = $response["results"]["timezone"];
-
     date_default_timezone_set($timezone);
+
     return date("m/d/Y h:i:s a", time());
 }
 
