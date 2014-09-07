@@ -28,24 +28,24 @@ function insertRecords($app, $moduleName) {
 }
 
 
-$app->post("/zoho(/(:moduleName(/(:methodName(/(:recordId))))))", function ($moduleName = null, $methodName = null, $recordId = null) use ($app) {
-	callZoho($app, $moduleName, $methodName, $recordId);
+$app->post("/zoho(/(:methodName(/(:moduleName(/(:recordId))))))", function ($methodName = null, $moduleName = null, $recordId = null) use ($app) {
+	callZoho($app, $methodName, $moduleName, $recordId);
 });
 
-$app->get("/zoho(/(:moduleName(/(:methodName(/(:recordId))))))", function ($moduleName = null, $methodName = null, $recordId = null) use ($app) {
-	callZoho($app, $moduleName, $methodName, $recordId);
+$app->get("/zoho(/(:methodName(/(:moduleName(/(:recordId))))))", function ($methodName = null, $moduleName = null, $recordId = null) use ($app) {
+	callZoho($app, $methodName, $moduleName, $recordId);
 });
 
 
-function callZoho($app, $moduleName, $methodName, $recordId) {
+function callZoho($app, $methodName, $moduleName, $recordId) {
 
-	if ($moduleName == null) {
-		throw new Exception("missing module router");
+	if ($methodName == null) {
+		throw new Exception("missing method router");
 	} else if ($moduleName == null) {
 		try {
 			$result = call_user_func($methodName);
 		} catch(Exception $e) {
-			throw new Exception("missing method router");
+			throw new Exception("missing module router");
 		}
 	} else if (is_callable($methodName)) {
         //date_default_timezone_set("America/Chicago");
