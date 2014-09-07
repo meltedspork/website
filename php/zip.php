@@ -37,7 +37,7 @@ function geolocation($zipcode) {
 	return $result;
 }
 
-function areaCode($zipcode) {
+function areacode($zipcode) {
 	$zips = getAPI($zipcode);
 
 	$area_code_str = $zips->area_codes;
@@ -77,6 +77,7 @@ $app->get("/zip/:function(/(:zipcode))", function ($function,$zipcode=null) use 
 });
 
 function showZip() {
+	// static title from csv file
 	return array(
 		"zip"					// 0
 		,"type"					// 1
@@ -103,6 +104,7 @@ function getAPI($zipcode) {
 	}
 	$result = new stdClass();
 
+	// csv file downloaded from
 	// http://www.unitedstateszipcodes.org/zip-code-database/
 	$zip_db = showZip();
 	if (($handle = fopen("flatfile/zip_code_database.csv", "r")) !== FALSE) {
