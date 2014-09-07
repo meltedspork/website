@@ -38,46 +38,70 @@ $app->get("/zoho(/(:methodName(/(:moduleName(/(:recordId))))))", function ($meth
 
 
 function callZoho($app, $method, $module, $record) {
+	$routes = new stdClass();
 
 	if ($method == null) {
 		throw new Exception("missing method router");
-	} else if ($module == null) {
-		try {
-			$result = call_user_func($method);
-		} catch(Exception $e) {
-			throw new Exception("missing module router");
-		}
-	} else if (is_callable($method)) {
-        //date_default_timezone_set("America/Chicago");
-	    $result = $call_user_func($method, $app, $module);
 	} else {
-    	//$result = getCurl($method,$module,null,$record);
-    	$result = setMethod($method,$module,$record);
-    }
+		$routes->method = $method;
+		$method = setMethod($method);
+		if ($module == null) {
+			try {
+				$result = call_user_func($method);
+			} catch(Exception $e) {
+				throw new Exception("missing module router");
+			}
+		} else {
+			$module = setModule($module);
+			$routes->module = $module;
+			try {
+				$result = call_user_func($method);
+			} catch(Exception $e) {
+				if (is_callable($method)) {
+    	    		//date_default_timezone_set("America/Chicago");
+	    			$result = $call_user_func($method, $app, $module);
+				} else {
+					//$routes->record = $record;
+    				$result = getCurl($method,$module,null,$record);
+    			}
+    		}
+		}
+	}
 	$response = $app->response();
 	$response->header("Access-Control-Allow-Origin", "*");
+
 	$app->render(200,array(
+		"routes" => $routes,
 		"zoho" => $result,
 	));
 
-	/*
-	$app->render(200,array(
-		"method" => $methodName,
-		"module" => $moduleName,
-		"record" => $recordId,
-	));
-	*/
 }
 
-function setMethod($method,$module,$record = null) {
+function setMethod($method) {
 	$methods = showMethods();
 	foreach($methods as $obj) {
 		if (strtolower($method) == strtolower($obj[0])) {
 			return $obj[0];
 		}
 	}
+	if (strtolower($method) == "showmethods") {
+		return "showMethods";
+	} else if (strtolower($method) == "showmodules") {
+		return "showModules";
+	}
+	throw new Exception($method . " method does not exist");
+	return;
+}
 
-	//$result = getCurl($methodName,$moduleName,null,$recordId);
+function setModule($module) {
+	$modules = showModules();
+	foreach($modules as $obj) {
+		if (strtolower($module) == strtolower($obj[0])) {
+			return $obj[0];
+		}
+	}
+	throw new Exception($module . " module does not exist");
+	return;
 }
 
 // show all methods available  from zoho
@@ -136,7 +160,7 @@ function showModules() {
 function getCurl($method,$module,$xmlData,$record = null,$format = "json") {
 	$authtoken = $GLOBALS['ztoken'];
 
-	$url = "https://crm.zoho.com/crm/private/json/{$method}/{$module}?";
+	$url = "https://crm.zoho.com/crm/private/json/{$module}/{$method}?";
 	$cdr = "newFormat=2&authtoken={$authtoken}&scope=crmapi&xmlData={$xmlData}&id={$record}";
 
 	$ch = curl_init($url);
