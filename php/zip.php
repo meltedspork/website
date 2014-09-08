@@ -121,7 +121,7 @@ function getAPI($zipcode) {
     	}
     	fclose($handle);
 	}
-	throw new Exception(" -" . $zipcode . "- zip does not exist");
+	throw new Exception("-" . $zipcode . "- zip does not exist");
 }
 
 $app->run();
