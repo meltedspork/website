@@ -6,7 +6,7 @@ $first = $_POST["FirstName"] ;
 $last = $_POST["LastName"];
 $phone = $_POST["Phone"];
 $mobile = $_POST["Mobile"];
-$action = $_POST["Action"];
+$action = $_REQUEST["Action"];
 
 
 //if ($action == "newlead"){

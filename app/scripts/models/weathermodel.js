@@ -55,9 +55,9 @@ define([
             this.api.Zipcode.fetch({
                 success: function () {
                     //self.output(self.api.Zipcode);
-                    var zipData = self.api.Zipcode.get('places')[0];
-                    var city = zipData['place name'];
-                    var state = zipData['state abbreviation'];
+                    var zipData = self.api.Zipcode.get('results');
+                    var city = zipData['city'];
+                    var state = zipData['state'];
 
                     self.api.Weather = new WeatherAPI([],{
                         city: city,
