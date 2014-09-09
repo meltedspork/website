@@ -1,4 +1,3 @@
-HI HI HI
 <?php
 require_once str_replace("php", "", __DIR__ ) . "vendor/msconfig-php/settings.php";
 
