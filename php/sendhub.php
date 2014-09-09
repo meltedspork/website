@@ -1,7 +1,6 @@
+HI HI HI
 <?php
 require_once str_replace("php", "", __DIR__ ) . "vendor/msconfig-php/settings.php";
-
-echo $GLOBALS['shphone'];
 
 //get Zoho data
 $first = $_POST["FirstName"] ;
