@@ -34,7 +34,7 @@ $action = $_REQUEST["Action"];
     curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
-
+    header("Access-Control-Allow-Origin: *");
     $result = curl_exec($ch);
     curl_close($ch);
     echo $result;
