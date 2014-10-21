@@ -8,7 +8,7 @@ $app->add(new \JsonApiMiddleware());
 
 
 
-//$app->response()->header("Content-Type", "application/json;charset=utf-8");
+$app->response()->header("Content-Type", "application/json;charset=utf-8");
 
 /*
 * Adaptation en php du fameux et excellent scripte Astro-MoonPhase de Brett Hamilton écrit en Perl.
