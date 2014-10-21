@@ -304,7 +304,7 @@ $app->get("/moon/:function", function ($function) use ($app) {
                 //"zipcode" => $zipcode,
                 //"timezone" => $timezone,
             ));
-    }*/
+    }
 });
 
 function getCurl($url) {
