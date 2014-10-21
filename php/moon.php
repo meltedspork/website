@@ -293,6 +293,7 @@ $app->get("/moon/:function", function ($function) use ($app) {
 
         //$timezone = $response["results"]["timezone"];
         //date_default_timezone_set($timezone);
+        date_default_timezone_set("America/Chicago");
 
         $result = call_user_func($function);
 
