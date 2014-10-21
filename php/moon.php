@@ -8,7 +8,7 @@ $app->add(new \JsonApiMiddleware());
 
 
 
-$app->response()->header("Content-Type", "application/json;charset=utf-8");
+//$app->response()->header("Content-Type", "application/json;charset=utf-8");
 
 /*
 * Adaptation en php du fameux et excellent scripte Astro-MoonPhase de Brett Hamilton écrit en Perl.
@@ -284,14 +284,15 @@ function lunarPhase() {
 }
 
 
-$app->get("/moon/:function(/(:$zipcode))", function ($function, $zipcode='60606') use ($app) {
-   /* if(is_callable($function)) {
-        $url = "https://theeyestudio.com/zip/".$zipcode;
+//$app->get("/moon/:function(/(:$zipcode))", function ($function, $zipcode='60606') use ($app) {
+$app->get("/moon/:function", function ($function) use ($app) {
+    if(is_callable($function)) {
+        //$url = "https://theeyestudio.com/zip/".$zipcode;
 
-        $response = getCurl($url);
+        //$response = getCurl($url);
 
-        $timezone = $response["results"]["timezone"];
-        date_default_timezone_set($timezone);
+        //$timezone = $response["results"]["timezone"];
+        //date_default_timezone_set($timezone);
 
         $result = call_user_func($function);
 
@@ -300,8 +301,8 @@ $app->get("/moon/:function(/(:$zipcode))", function ($function, $zipcode='60606'
 
         $app->render(200,array(
                 "moon" => $result,
-                "zipcode" => $zipcode,
-                "timezone" => $timezone,
+                //"zipcode" => $zipcode,
+                //"timezone" => $timezone,
             ));
     }*/
 });
