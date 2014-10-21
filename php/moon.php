@@ -285,7 +285,7 @@ function lunarPhase() {
 
 
 $app->get("/moon/:function(/(:$zipcode))", function ($function, $zipcode='60606') use ($app) {
-    if(is_callable($function)) {
+   /* if(is_callable($function)) {
         $url = "https://theeyestudio.com/zip/".$zipcode;
 
         $response = getCurl($url);
@@ -303,7 +303,7 @@ $app->get("/moon/:function(/(:$zipcode))", function ($function, $zipcode='60606'
                 "zipcode" => $zipcode,
                 "timezone" => $timezone,
             ));
-    }
+    }*/
 });
 
 function getCurl($url) {
